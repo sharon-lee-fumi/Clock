@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:background="@android:color/black"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:tabIndicatorColor="@android:color/black">
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_alarm_24dp"
+                    android:text="@string/tab_text_1" />
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_access_time_24dp"
+                    android:text="@string/tab_text_2" />
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_hourglass_empty_24dp"
+                    android:text="@string/tab_text_3" />
+
+                <android.support.design.widget.TabItem
+                    android:id="@+id/tabItem4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/ic_timer_24dp"
+                    android:text="@string/tab_text_4" />
+
+            </android.support.design.widget.TabLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:id="@+id/toolbar_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@android:color/darker_gray" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>
