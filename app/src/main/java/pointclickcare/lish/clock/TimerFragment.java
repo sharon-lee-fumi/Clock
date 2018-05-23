@@ -18,8 +18,7 @@ public class TimerFragment extends MainActivity.PlaceholderFragment {
         // Required empty public constructor
     }
 
-    public static TimerFragment getInstance()
-    {
+    public static TimerFragment getInstance() {
         return new TimerFragment();
     }
 
