@@ -18,8 +18,7 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         // Required empty public constructor
     }
 
-    public static ClockFragment getInstance()
-    {
+    public static ClockFragment getInstance() {
         return new ClockFragment();
     }
 

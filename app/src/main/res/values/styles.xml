@@ -17,4 +17,52 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/colorBackground</item>
+        <item name="tabTextAppearance">@style/TabItemTextStyle</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryText</item>
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TabItemTextStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="AlarmTextStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AlarmTimeNumberStyle" parent="AlarmTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
+    </style>
+
+    <style name="AlarmAmPmStyle" parent="AlarmTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+    </style>
+
+    <style name="AlarmDaysStyle" parent="AlarmTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TimerTextStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="TimerTimeNumberStyle" parent="TimerTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
+    </style>
+
+    <style name="TimerhhmmssStyle" parent="TimerTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+    </style>
+
+    <style name="TimerButtonStyle" parent="TimerTextStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
+    </style>
+
 </resources>

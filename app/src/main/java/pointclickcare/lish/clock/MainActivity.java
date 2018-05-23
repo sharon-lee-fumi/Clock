@@ -1,23 +1,17 @@
 package pointclickcare.lish.clock;
 
-import android.support.design.widget.TabLayout;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,17 +35,57 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Integer iconId = null;
+                switch (tab.getPosition()) {
+                    case 0:
+                        iconId = android.R.drawable.ic_input_add;
+                        break;
+                    case 1:
+                        iconId = android.R.drawable.ic_lock_idle_alarm;
+                        break;
+                    case 3:
+                        iconId = android.R.drawable.ic_media_play;
+                        break;
+                    case 2:
+                    default:
+                        break;
+                }
+
+                FloatingActionButton fab = findViewById(R.id.fab);
+                if (fab != null) {
+                    if (iconId != null) {
+                        fab.setVisibility(View.VISIBLE);
+                        fab.setImageDrawable(getResources().getDrawable(iconId, getTheme()));
+                    } else {
+                        fab.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -99,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
 
-            switch (sectionNumber)
-            {
+            switch (sectionNumber) {
                 case 1:
                     return AlarmFragment.getInstance();
                 case 2:

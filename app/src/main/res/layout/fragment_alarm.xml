@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
-    android:background="@android:color/black"
     tools:context=".AlarmFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,7 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,52 +28,46 @@
 
                 <TextView
                     android:id="@+id/time1"
+                    style="@style/AlarmTimeNumberStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:paddingLeft="5dp"
-                    android:text="8:30"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                    android:textColor="@android:color/white" />
+                    android:text="8:30" />
 
                 <TextView
                     android:id="@+id/period1"
+                    style="@style/AlarmAmPmStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:text="AM"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@android:color/white" />
+                    android:text="AM" />
 
                 <Switch
                     android:id="@+id/switch1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:paddingRight="10dp"
-                    android:shadowColor="@android:color/darker_gray"
                     android:textColorLink="@color/colorPrimary" />
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="6dp">
 
                 <TextView
                     android:id="@+id/days1"
+                    style="@style/AlarmDaysStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:paddingLeft="5dp"
-                    android:text="Mon, Tue, Wed, Thu, Fri"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@android:color/white" />
+                    android:text="Mon, Tue, Wed, Thu, Fri" />
 
                 <ImageButton
                     android:id="@+id/btn_display1"
@@ -81,25 +75,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:background="@android:color/black"
-                    android:paddingRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:paddingEnd="6dp"
                     android:src="@android:drawable/arrow_down_float" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/darker_gray" />
+            <include layout="@layout/vertical_divider" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,31 +97,28 @@
 
                 <TextView
                     android:id="@+id/time2"
+                    style="@style/AlarmTimeNumberStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:paddingLeft="5dp"
-                    android:text="9:00"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                    android:textColor="@android:color/white" />
+                    android:text="9:00" />
 
                 <TextView
                     android:id="@+id/period2"
+                    style="@style/AlarmAmPmStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:text="AM"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@android:color/white" />
+                    android:text="AM" />
 
                 <Switch
                     android:id="@+id/switch2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:paddingRight="10dp"
                     android:shadowColor="@android:color/darker_gray"
                     android:textColorLink="@color/colorPrimary" />
 
@@ -142,18 +128,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="6dp">
 
                 <TextView
                     android:id="@+id/days2"
+                    style="@style/AlarmDaysStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:paddingLeft="5dp"
-                    android:text="Sat, Sun"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@android:color/white" />
+                    android:text="Sat, Sun" />
 
                 <ImageButton
                     android:id="@+id/btn_display2"
@@ -161,32 +147,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:background="@android:color/black"
-                    android:paddingRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:paddingEnd="6dp"
                     android:src="@android:drawable/arrow_down_float" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/line2"
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/darker_gray" />
-
+            <include layout="@layout/vertical_divider" />
         </LinearLayout>
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_add"
-        app:backgroundTint="@color/colorPrimary" />
-
-
 </LinearLayout>

@@ -18,12 +18,11 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
         // Required empty public constructor
     }
 
-    public static StopwatchFragment getInstance()
-    {
+    public static StopwatchFragment getInstance() {
         return new StopwatchFragment();
     }
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

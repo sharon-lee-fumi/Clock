@@ -18,8 +18,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         // Required empty public constructor
     }
 
-    public static AlarmFragment getInstance()
-    {
+    public static AlarmFragment getInstance() {
         return new AlarmFragment();
     }
 
