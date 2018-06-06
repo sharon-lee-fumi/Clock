@@ -5,7 +5,7 @@
 
         <variable
             name="stopwatch"
-            type="pointclickcare.lish.clock.Stopwatch" />
+            type="pointclickcare.lish.clock.model.Stopwatch" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        tools:context=".StopwatchFragment">
+        tools:context=".ui.StopwatchFragment">
 
         <!-- TODO: Update blank fragment layout -->
 

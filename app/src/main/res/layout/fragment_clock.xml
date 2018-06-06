@@ -5,7 +5,7 @@
 
         <variable
             name="clock"
-            type="pointclickcare.lish.clock.Clock" />
+            type="pointclickcare.lish.clock.model.Clock" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        tools:context=".ClockFragment">
+        tools:context=".ui.ClockFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout
