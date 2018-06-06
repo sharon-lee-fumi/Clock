@@ -5,7 +5,7 @@
 
         <variable
             name="timer"
-            type="pointclickcare.lish.clock.Timer" />
+            type="pointclickcare.lish.clock.model.Timer" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/black"
         android:orientation="vertical"
-        tools:context=".TimerFragment">
+        tools:context=".ui.TimerFragment">
 
         <!-- TODO: Update blank fragment layout -->
 
