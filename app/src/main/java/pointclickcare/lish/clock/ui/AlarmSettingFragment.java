@@ -44,12 +44,6 @@ public class AlarmSettingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_alarm_setting, container, false);
 
-        if (message.equals("Tue"))
-        {
-            Button tue = view.findViewById(R.id.tue);
-            tue.setText(message);
-        }
         return view;
     }
-
 }

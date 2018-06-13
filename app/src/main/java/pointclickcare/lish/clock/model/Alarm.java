@@ -9,12 +9,14 @@ public class Alarm {
     private String period;
     private String days;
     private boolean status;
+    public boolean selected;
 
     public Alarm() {
         this.time = this.getTime();
         this.period = this.getPeriod();
         this.days = this.getDays();
         this.status = this.getStatus();
+        this.selected = false;
     }
 
     public Alarm(String time, String period, String days, boolean status) {

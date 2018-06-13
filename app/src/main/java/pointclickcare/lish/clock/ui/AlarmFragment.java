@@ -18,6 +18,7 @@ import java.util.List;
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
+import pointclickcare.lish.clock.model.AlarmData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +28,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
     List<Alarm> alarmList = new ArrayList<>();
     AlarmListAdapter adapter;
     FragmentAlarmBinding binding;
+    AlarmData data = new AlarmData();
 
     public AlarmFragment() {
         // Required empty public constructor
@@ -42,7 +44,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_alarm, container, false);
 
-        alarmList = generateAlarmData(3);
+        alarmList = generateAlarmData(6);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
         View view = binding.getRoot();
@@ -60,7 +62,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         Fragment fragment = AlarmSettingFragment.newInstance(message);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.add(R.id.editDays, fragment, "fragment");
+        //transaction.add(R.id.editDays, fragment, "fragment");
         transaction.commit();
         return view;
     }
@@ -83,4 +85,5 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         }
         return alarmList;
     }
+
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="alarm"
             type="pointclickcare.lish.clock.model.Alarm" />
+
+        <variable
+            name="alarmSettingView"
+            type="boolean" />
 
     </data>
 
@@ -76,13 +80,11 @@
                 android:src="@android:drawable/arrow_down_float" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/editDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <include
+            android:id="@+id/alarm_setting"
+            layout="@layout/fragment_alarm_setting"
+            bind:setting="@{alarmSettingView}"/>
 
-        </LinearLayout>
     </LinearLayout>
 
 </layout>
