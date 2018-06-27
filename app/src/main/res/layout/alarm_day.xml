@@ -10,7 +10,7 @@
             type="String" />
 
         <variable
-            name="selected"
+            name="selectedDay"
             type="boolean" />
     </data>
 
@@ -25,7 +25,7 @@
             android:layout_height="@dimen/day_circle_dimen"
             android:layout_centerInParent="true"
             android:src="@drawable/oval_selected"
-            android:visibility="@{selected ? View.VISIBLE : View.INVISIBLE}" />
+            android:visibility="@{selectedDay ? View.VISIBLE : View.INVISIBLE}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,6 +33,6 @@
             android:layout_centerInParent="true"
             android:text="@{dayStr}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@{selected ? @android:color/black : @android:color/white}" />
+            android:textColor="@{selectedDay ? @android:color/black : @android:color/white}" />
     </RelativeLayout>
 </layout>

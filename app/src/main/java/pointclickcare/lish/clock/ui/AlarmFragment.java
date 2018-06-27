@@ -73,13 +73,21 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         for (int i = 0; i < count; i++) {
             Alarm alarm = new Alarm();
             //alarm.time = new Date(new Date().getTime() + (long) (Math.random() * 10000));
-            alarm.setTime("8:00");
-            /*Boolean[] days = new Boolean[7];
+            AlarmData alarmData = new AlarmData();
+            alarm.setAlarmData(alarmData);
+
+            alarmData.time.set("9:00");
+            alarmData.period.set("PM");
+            alarmData.status.set(true);
+
+/*            Boolean[] days = new Boolean[7];
             for (int j = 0; j < days.length; j++) {
                 days[j] = (long) (Math.random() * 100) % 2 != 0;
             }*/
             //alarm.days = days;
-            alarm.setPeriod("AM");
+
+            //alarm.setTime("8:00");
+            //alarm.setPeriod("AM");
             alarm.setDays("Monday");
             alarmList.add(alarm);
         }
