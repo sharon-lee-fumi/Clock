@@ -11,6 +11,10 @@
             name="setting"
             type="boolean" />
 
+        <variable
+            name="alarmDays"
+            type="pointclickcare.lish.clock.model.AlarmData" />
+
     </data>
 
     <LinearLayout
@@ -43,48 +47,37 @@
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_sun}"
-                bind:selected="@{false}" />
+                bind:selectedDay="@={alarmDays.days[0]}" />
 
             <include
                 layout="@layout/alarm_day"
-
                 bind:dayStr="@{@string/days_short_string_mon}"
-                bind:selected="@{true}" />
+                bind:selectedDay="@={alarmDays.days[1]}" />
 
             <include
                 layout="@layout/alarm_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 bind:dayStr="@{@string/days_short_string_tue}"
-                bind:selected="@{true}" />
+                bind:selectedDay="@={alarmDays.days[2]}" />
 
             <include
                 layout="@layout/alarm_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 bind:dayStr="@{@string/days_short_string_wed}"
-                bind:selected="@{false}" />
+                bind:selectedDay="@={alarmDays.days[3]}" />
 
             <include
                 layout="@layout/alarm_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 bind:dayStr="@{@string/days_short_string_thu}"
-                bind:selected="@{true}" />
+                bind:selectedDay="@={alarmDays.days[4]}" />
 
             <include
                 layout="@layout/alarm_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 bind:dayStr="@{@string/days_short_string_fri}"
-                bind:selected="@{true}" />
+                bind:selectedDay="@={alarmDays.days[5]}" />
 
             <include
                 layout="@layout/alarm_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 bind:dayStr="@{@string/days_short_string_sat}"
-                bind:selected="@{false}" />
+                bind:selectedDay="@={alarmDays.days[6]}" />
         </LinearLayout>
 
         <include layout="@layout/vertical_divider" />

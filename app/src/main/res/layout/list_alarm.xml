@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.time}" />
+                android:text="@={alarm.alarmData.time}" />
 
             <TextView
                 android:id="@+id/period"
@@ -44,7 +44,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="@{alarm.period}" />
+                android:text="@={alarm.alarmData.period}" />
 
             <Switch
                 android:id="@+id/status"
