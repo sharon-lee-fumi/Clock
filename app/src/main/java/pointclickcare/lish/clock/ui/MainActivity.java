@@ -1,5 +1,6 @@
 package pointclickcare.lish.clock.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -13,7 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.Toast;
+
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
+import pointclickcare.lish.clock.ui.Clock.AddClock;
+import pointclickcare.lish.clock.ui.Clock.ClockFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
                         fab.setVisibility(View.GONE);
                     }
                 }
+
+                    fab.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+
+                            if (tab.getPosition() == 1) {
+                                AddClock();
+                            }
+                        }
+                    });
             }
 
             @Override
@@ -173,4 +189,11 @@ public class MainActivity extends AppCompatActivity {
             return 4;
         }
     }
+
+    public void AddClock(){
+        Intent intent = new Intent(this, AddClock.class);
+        //intent.putExtra(Extra.DATA, "Data from Clock");
+        startActivity(intent);
+    }
+
 }

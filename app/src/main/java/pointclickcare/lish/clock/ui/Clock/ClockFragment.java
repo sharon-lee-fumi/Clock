@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.ui;
+package pointclickcare.lish.clock.ui.Clock;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.databinding.DataBindingUtil;
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentClockBinding;
 import pointclickcare.lish.clock.model.Clock;
+import pointclickcare.lish.clock.ui.MainActivity;
 
 
 /**

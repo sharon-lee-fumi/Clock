@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        tools:context=".ui.ClockFragment">
+        tools:context=".ui.Clock.ClockFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout

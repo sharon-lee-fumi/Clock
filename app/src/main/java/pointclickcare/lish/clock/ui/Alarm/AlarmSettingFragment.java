@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.ui;
+package pointclickcare.lish.clock.ui.Alarm;
 
 
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmSettingBinding;

@@ -1,7 +1,6 @@
-package pointclickcare.lish.clock.ui;
+package pointclickcare.lish.clock.ui.Alarm;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +18,7 @@ import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
 import pointclickcare.lish.clock.model.AlarmData;
+import pointclickcare.lish.clock.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,8 +76,8 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
             AlarmData alarmData = new AlarmData();
             alarm.setAlarmData(alarmData);
 
-            alarmData.time.set("9:00");
-            alarmData.period.set("PM");
+            //alarmData.time.set("9:00");
+            //alarmData.period.set("PM");
             alarmData.status.set(true);
 
 /*            Boolean[] days = new Boolean[7];
@@ -86,12 +86,11 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
             }*/
             //alarm.days = days;
 
-            //alarm.setTime("8:00");
-            //alarm.setPeriod("AM");
+            alarm.setTime("8:00");
+            alarm.setPeriod("AM");
             alarm.setDays("Monday");
             alarmList.add(alarm);
         }
         return alarmList;
     }
-
 }
