@@ -11,6 +11,10 @@
             name="alarmSettingView"
             type="boolean" />
 
+        <variable
+            name="alarmData"
+            type="pointclickcare.lish.clock.model.AlarmData" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:paddingLeft="5dp"
-                android:text="@={alarm.alarmData.time}" />
+                android:text="@{alarm.time}" />
 
             <TextView
                 android:id="@+id/period"
@@ -44,7 +48,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="@={alarm.alarmData.period}" />
+                android:text="@{alarm.period}" />
 
             <Switch
                 android:id="@+id/status"
@@ -83,7 +87,8 @@
         <include
             android:id="@+id/alarm_setting"
             layout="@layout/fragment_alarm_setting"
-            bind:setting="@{alarmSettingView}"/>
+            bind:setting="@{alarmSettingView}"
+            bind:alarmDays="@{alarmData}"/>
 
     </LinearLayout>
 

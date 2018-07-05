@@ -6,16 +6,16 @@ import java.util.Locale;
 
 public class Alarm {
     private AlarmData alarmData;
-    //private String time;
-    //private String period;
+    private String time;
+    private String period;
     private String days;
     //private boolean status;
     public boolean selected;
 
     public Alarm() {
         this.alarmData = this.getAlarmData();
-        //this.time = this.getTime();
-        //this.period = this.getPeriod();
+        this.time = this.getTime();
+        this.period = this.getPeriod();
         this.days = this.getDays();
         //this.status = this.getStatus();
         this.selected = false;
@@ -29,6 +29,16 @@ public class Alarm {
         this.status = status;
     }
 
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+*/
     public String getTime() {
         return time;
     }
@@ -45,15 +55,6 @@ public class Alarm {
         this.period = period;
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-*/
     public String getDays() {
         return days;
     }

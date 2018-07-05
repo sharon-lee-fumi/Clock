@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="zone"
+            type="pointclickcare.lish.clock.model.Zone" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.Clock.AddClock"
+        tools:showIn="@layout/activity_add_clock">
+
+        <TextView
+            android:id="@+id/zone_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="20dp"
+            android:text="@{@string/zone_info(zone.countryName, zone.zoneName, zone.formattedTime)}"
+            tools:text="Country: Canada, \nZone: America\/Toronto, \nTime: Jun 25, 18:22" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_zone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="pointclickcare.lish.clock.ui.Clock.AddClock" />
+    </LinearLayout>
+
+</layout>

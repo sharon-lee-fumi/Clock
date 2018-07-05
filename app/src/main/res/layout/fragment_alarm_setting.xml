@@ -24,7 +24,7 @@
         android:background="@color/colorBackground"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".ui.AlarmSettingFragment"
+        tools:context=".ui.Alarm.AlarmSettingFragment"
         android:visibility="@{setting ? View.VISIBLE : View.GONE}">
 
 
@@ -47,37 +47,37 @@
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_sun}"
-                bind:selectedDay="@={alarmDays.days[0]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_mon}"
-                bind:selectedDay="@={alarmDays.days[1]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_tue}"
-                bind:selectedDay="@={alarmDays.days[2]}" />
+                bind:selectedDay="@={alarmDays.d[1]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_wed}"
-                bind:selectedDay="@={alarmDays.days[3]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_thu}"
-                bind:selectedDay="@={alarmDays.days[4]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_fri}"
-                bind:selectedDay="@={alarmDays.days[5]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
 
             <include
                 layout="@layout/alarm_day"
                 bind:dayStr="@{@string/days_short_string_sat}"
-                bind:selectedDay="@={alarmDays.days[6]}" />
+                bind:selectedDay="@={alarmDays.d[0]}" />
         </LinearLayout>
 
         <include layout="@layout/vertical_divider" />
