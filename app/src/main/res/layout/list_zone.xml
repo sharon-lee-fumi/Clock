@@ -11,42 +11,37 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <TextView
             android:id="@+id/countryCode"
+            style="@style/CountryCodeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="10dp"
             android:text="@{zoneInfo.countryCode}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="?android:attr/textColorPrimary"
             tools:text="CA" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/country_name"
+            style="@style/ZoneStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/countryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{zoneInfo.countryName}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:text="Canada/Toronto" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="@{zoneInfo.countryName}"
+            tools:text="Canada" />
 
             <TextView
                 android:id="@+id/formattedTime"
+                style="@style/ZoneStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{zoneInfo.formattedTime}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="?android:attr/textColorPrimary"
                 tools:text="May 23, 2018 13:00" />
-        </LinearLayout>
     </LinearLayout>
 </layout>

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        tools:context=".ui.Clock.ClockFragment">
+        tools:context=".ui.Clock.Time.ClockFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout
@@ -21,36 +21,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:gravity="bottom">
 
             <TextView
                 android:id="@+id/time"
+                style="@style/LocalTimeStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{clock.time}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                android:textColor="@android:color/white" />
+                tools:text="8:00"/>
 
             <TextView
                 android:id="@+id/period"
+                style="@style/LocalPeriodStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:text="@{clock.period}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@android:color/white" />
+                tools:text="AM" />
         </LinearLayout>
 
 
         <TextView
             android:id="@+id/date"
+            style="@style/LocalDateStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/time_container"
             android:layout_centerHorizontal="true"
             android:text="@{clock.date}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@android:color/white" />
+            tools:text="Thu, Jul 12, 2018"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date"/>
     </RelativeLayout>
 </layout>

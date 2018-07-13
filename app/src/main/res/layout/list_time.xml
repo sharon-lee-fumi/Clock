@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ZoneTime"
+            type="pointclickcare.lish.clock.model.ZoneTime" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/country_name"
+            style="@style/ZoneStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="@{zoneInfo.countryName}"
+            tools:text="Canada" />
+
+        <TextView
+            android:id="@+id/formattedTime"
+            style="@style/ClockTimeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{zoneInfo.formattedTime}"
+            tools:text="May 23, 13:00" />
+    </LinearLayout>
+</layout>

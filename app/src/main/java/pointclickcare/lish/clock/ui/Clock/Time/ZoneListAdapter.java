@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.ui.Clock;
+package pointclickcare.lish.clock.ui.Clock.Time;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;

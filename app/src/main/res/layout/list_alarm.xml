@@ -89,7 +89,6 @@
             layout="@layout/fragment_alarm_setting"
             bind:setting="@{alarmSettingView}"
             bind:alarmDays="@{alarmData}"/>
-
     </LinearLayout>
 
 </layout>
