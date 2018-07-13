@@ -39,4 +39,7 @@
 
     <string name="zone_info">Country: %1$s, Zone: %2$s, Time: %3$s</string>
 
+    <string name="server_error_message">Cannot retrieve the data from the server</string>
+    <string name="db_error_message">Cannot retrieve the data from the server</string>
+
 </resources>

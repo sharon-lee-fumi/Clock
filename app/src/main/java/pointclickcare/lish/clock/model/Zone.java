@@ -63,6 +63,6 @@ public class Zone {
     }
 
     public String getFormattedTime() {
-        return new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault()).format(new Date(timestamp));
+        return new SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).format(new Date(timestamp));
     }
 }

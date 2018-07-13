@@ -14,12 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Toast;
-
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
-import pointclickcare.lish.clock.ui.Clock.AddClock;
-import pointclickcare.lish.clock.ui.Clock.ClockFragment;
+import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
+import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -191,9 +189,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AddClock(){
-        Intent intent = new Intent(this, AddClock.class);
+        Intent intent = new Intent(this, AddClockActivity.class);
         //intent.putExtra(Extra.DATA, "Data from Clock");
         startActivity(intent);
     }
-
 }

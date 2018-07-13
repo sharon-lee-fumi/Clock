@@ -48,6 +48,41 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="LocalTimeStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display3</item>
+    </style>
+
+    <style name="LocalPeriodStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+    </style>
+
+    <style name="LocalDateStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+    </style>
+
+    <style name="ClockTimeStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+    </style>
+
+    <style name="ZoneStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="CountryCodeStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+    </style>
+
     <style name="TimerTextStyle">
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:background">@android:color/transparent</item>

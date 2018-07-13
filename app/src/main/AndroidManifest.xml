@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Clock.AddClock"
+            android:name=".ui.Clock.Time.AddClockActivity"
             android:label="@string/title_activity_add_clock"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
