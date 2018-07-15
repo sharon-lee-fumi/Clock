@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="ZoneTime"
+            name="zoneTime"
             type="pointclickcare.lish.clock.model.ZoneTime" />
     </data>
 
@@ -22,11 +21,11 @@
             style="@style/ZoneStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:checked="false"
-            android:text="@{zoneInfo.countryName}"
+            android:text="@{zoneTime.countryName}"
             tools:text="Canada" />
 
         <TextView
@@ -34,7 +33,7 @@
             style="@style/ClockTimeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{zoneInfo.formattedTime}"
+            android:text="@{zoneTime.formatted}"
             tools:text="May 23, 13:00" />
     </LinearLayout>
 </layout>
