@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pointclickcare.lish.clock">
 
+    <permission
+        android:name="pointclickcare.lish.clock.PROVIDER_PERMISSION"
+        android:description="@string/desc_provider_permission"
+        android:label="Provider permission for security"
+        android:protectionLevel="dangerous" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="pointclickcare.lish.clock.PROVIDER_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +31,14 @@
         <activity
             android:name=".ui.Clock.Time.AddClockActivity"
             android:label="@string/title_activity_add_clock"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <provider
+            android:name=".ui.Clock.Time.ClockContentProvider"
+            android:authorities="pointclickcare.lish.clock.ui.Clock.Time.ClockContentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="pointclickcare.lish.clock.PROVIDER_PERMISSION" />
     </application>
 
 </manifest>

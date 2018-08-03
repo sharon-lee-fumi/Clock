@@ -12,27 +12,27 @@ import java.util.List;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.ListTimeBinding;
-import pointclickcare.lish.clock.model.Zone;
+import pointclickcare.lish.clock.model.Time;
+import pointclickcare.lish.clock.model.ZoneTime;
 
 public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHolder>{
-    private List<Zone> listTime = new ArrayList<>();
+    private List<Time> listTime = new ArrayList<>();
 
-    public void setSource(List<Zone> list) {
+    public void setSource(List<Time> list) {
         listTime = list;
     }
 
-    @NonNull
     @Override
-    public TimeListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TimeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ListTimeBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.list_time, parent, false);
         return new ViewHolder(binding.getRoot(), binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TimeListAdapter.ViewHolder holder, int position) {
-        Zone time = listTime.get(position);
-        //holder.binding.setZoneTime(time);
+    public void onBindViewHolder(TimeListAdapter.ViewHolder holder, int position) {
+        Time time = listTime.get(position);
+        holder.binding.setTime(time);
         holder.time = time;
     }
 
@@ -44,7 +44,7 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ListTimeBinding binding;
-        Zone time;
+        Time time;
 
         public ViewHolder(View itemView, ListTimeBinding binding) {
             super(itemView);
