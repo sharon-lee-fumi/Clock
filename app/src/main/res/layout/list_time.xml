@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="zoneTime"
-            type="pointclickcare.lish.clock.model.ZoneTime" />
+            name="time"
+            type="pointclickcare.lish.clock.model.Time" />
     </data>
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:checked="false"
-            android:text="@{zoneTime.countryName}"
+            android:text="@{time.countryName}"
             tools:text="Canada" />
 
         <TextView
@@ -33,7 +33,7 @@
             style="@style/ClockTimeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{zoneTime.formatted}"
+            android:text="@{time.gmtOffset.toString()}"
             tools:text="May 23, 13:00" />
     </LinearLayout>
 </layout>
