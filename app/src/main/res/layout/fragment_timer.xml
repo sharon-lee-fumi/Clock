@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="timer"
             type="pointclickcare.lish.clock.model.Timer" />
@@ -19,6 +21,7 @@
         <!-- TODO: Update blank fragment layout -->
 
         <LinearLayout
+            android:id="@+id/timerDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -85,6 +88,7 @@
         <include layout="@layout/vertical_divider" />
 
         <LinearLayout
+            android:id="@+id/timerButtons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
