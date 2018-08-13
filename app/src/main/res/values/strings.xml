@@ -32,7 +32,7 @@
     <string name="days_short_string_sat">S</string>
 
     <string-array name="days_short_string">
-        <item>@string/days_short_string_sun</item>
+        <item>@string/days_short_string_sun</item>w
         <item>@string/days_short_string_mon</item>
         <item>@string/days_short_string_tue</item>
         <item>@string/days_short_string_wed</item>
@@ -52,5 +52,7 @@
     <string name="db_error_message">Cannot retrieve the data from the server</string>
 
     <string name="desc_provider_permission">Content Provider permission</string>
+
+    <string name="add_clock_title">Add Clock</string>
 
 </resources>

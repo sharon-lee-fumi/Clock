@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_zone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ui.Clock.Time.AddClockActivity"
-        tools:showIn="@layout/activity_add_clock">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_zone"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="vertical"
-            tools:context="pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity" />
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
 </layout>
