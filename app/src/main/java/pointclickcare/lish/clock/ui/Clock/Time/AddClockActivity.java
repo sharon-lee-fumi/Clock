@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -41,15 +42,16 @@ public class AddClockActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clock);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.add_clock_title);
         setSupportActionBar(toolbar);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.content_add_clock);
+        View contentView = findViewById(R.id.content_add_clock);
+        binding = DataBindingUtil.bind(contentView);
         adapter = new ZoneListAdapter();
         binding.listZone.setAdapter(adapter);
         binding.listZone.setLayoutManager(new LinearLayoutManager(this));
