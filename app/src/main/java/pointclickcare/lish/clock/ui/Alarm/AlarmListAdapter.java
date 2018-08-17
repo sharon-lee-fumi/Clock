@@ -1,5 +1,6 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
+import android.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.databinding.AlarmDayBinding;
 import pointclickcare.lish.clock.databinding.ListAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
+import pointclickcare.lish.clock.model.AlarmData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +66,29 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                     }
                     mAlarmList.get(position).selected = true;
                     binding.setAlarmSettingView(mAlarmList.get(position).selected);
+
+                    AlarmDayBinding[] bindingsForAlarmDayButton = {binding.alarmSetting.alarmDayBtnSun,
+                            binding.alarmSetting.alarmDayBtnMon, binding.alarmSetting.alarmDayBtnTue,
+                            binding.alarmSetting.alarmDayBtnWed, binding.alarmSetting.alarmDayBtnThu,
+                            binding.alarmSetting.alarmDayBtnFri, binding.alarmSetting.alarmDayBtnSat};
+                    AlarmData ad =  mAlarmList.get(position).alarmData;
+                    for (int i =0; i < ad.alarmDayBtns.length; i++)
+                    {
+                        int finalI = i;
+                        bindingsForAlarmDayButton[i].alarmDaysContainer.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                bindingsForAlarmDayButton[finalI].setSelectedDay(
+                                        !bindingsForAlarmDayButton[finalI].getSelectedDay());
+                            }
+                        });
+                    }
+
+                    binding.alarmSetting.btnHide.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            mAlarmList.get(position).selected = false;
+                            binding.setAlarmSettingView(mAlarmList.get(position).selected);
+                        }
+                    });
                 }
             });
         }

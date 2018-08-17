@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmSettingBinding;
@@ -16,7 +18,7 @@ import pointclickcare.lish.clock.util.Extra;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlarmSettingFragment extends Fragment {
+public class AlarmSettingFragment extends Fragment{
 
     FragmentAlarmSettingBinding binding;
     private boolean[] days = new boolean[7];
@@ -40,7 +42,7 @@ public class AlarmSettingFragment extends Fragment {
         if (getArguments() != null) {
             this.message = getArguments().getString(Extra.ALARM);
         }
-            }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +52,11 @@ public class AlarmSettingFragment extends Fragment {
 
         binding = FragmentAlarmSettingBinding.inflate(getLayoutInflater());
 
-/*
+
+        Toast.makeText(getActivity(), "ok", Toast.LENGTH_LONG);
+        //binding.daysSetting.setOnClickListener(this.binding);
+
+
         AdapterView.OnItemClickListener itemClickListener =
                 new AdapterView.OnItemClickListener(){
                     @Override
@@ -58,8 +64,9 @@ public class AlarmSettingFragment extends Fragment {
                                             View itemView,
                                             int position,
                                             long id) {
+                        Toast.makeText(getActivity(), "ok", Toast.LENGTH_LONG);
 
-                };*/
+                    }};
 
         return view;
     }

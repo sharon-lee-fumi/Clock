@@ -87,8 +87,8 @@
         <include
             android:id="@+id/alarm_setting"
             layout="@layout/fragment_alarm_setting"
-            bind:setting="@{alarmSettingView}"
-            bind:alarmDays="@{alarmData}"/>
+            bind:alarmSetting="@{alarmSettingView}"
+            bind:alarmDaysBtn="@{alarmData}"/>
     </LinearLayout>
 
 </layout>
