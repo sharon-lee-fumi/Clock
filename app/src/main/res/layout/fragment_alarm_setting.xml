@@ -15,10 +15,6 @@
             name="alarmDaysBtn"
             type="pointclickcare.lish.clock.model.AlarmData" />
 
-        <variable
-            name="alarmDaysSetting"
-            type="boolean[]" />
-
     </data>
 
     <LinearLayout
