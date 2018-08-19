@@ -64,5 +64,14 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:src="@drawable/oval" />
+
+        <Button
+            android:id="@+id/resetBtn"
+            style="@style/StopwatchButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="100dp"
+            android:text="@string/stopwatch_reset" />
     </FrameLayout>
 </layout>

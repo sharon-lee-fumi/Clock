@@ -23,7 +23,7 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
     Long StartTime = 0L;
     Long TimeBuff = 0L;
     Long UpdateTime = 0L;
-    int Seconds, Minutes, MilliSeconds ;
+    int Seconds, Minutes, MilliSeconds;
 
     boolean imgBtnRunStatus = false;
 
@@ -44,6 +44,8 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_stopwatch, container, false);
         View view = binding.getRoot();
 
+        binding.resetBtn.setVisibility(View.INVISIBLE);
+
         handler = new Handler();
         binding.imgBtnRun.setOnClickListener(
                 viewBtn ->{
@@ -58,8 +60,30 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
                         handler.removeCallbacks(runnable);
                         imgBtnRunStatus = false;
                     }
+                    binding.resetBtn.setVisibility(View.VISIBLE);
                 }
         );
+
+        binding.resetBtn.setOnClickListener(
+                viewBtn ->{
+                    MillisecondTime = 0L ;
+                    StartTime = 0L ;
+                    TimeBuff = 0L ;
+                    UpdateTime = 0L ;
+                    Seconds = 0 ;
+                    Minutes = 0 ;
+                    MilliSeconds = 0 ;
+
+                    binding.stopwatchM.setText("");
+                    binding.stopwatchS.setText("0");
+                    binding.stopwatchMs.setText("00");
+
+                    handler.removeCallbacks(runnable);
+                    imgBtnRunStatus = false;
+                    binding.resetBtn.setVisibility(View.INVISIBLE);
+                }
+        );
+
         return view;
     }
 
