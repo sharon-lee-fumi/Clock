@@ -40,7 +40,6 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
         return listTime.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ListTimeBinding binding;
         Time time;

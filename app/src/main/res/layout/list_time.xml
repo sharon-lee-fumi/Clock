@@ -8,9 +8,6 @@
             name="time"
             type="pointclickcare.lish.clock.model.Time" />
 
-        <variable
-            name="gmtOffset"
-            type="long" />
     </data>
 
     <LinearLayout
@@ -37,7 +34,7 @@
             style="@style/ClockTimeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{time.getCalculatedTime(gmtOffset)}"
+            android:text="@{time.getCalculatedTime}"
             tools:text="13:00" />
 
         <TextView

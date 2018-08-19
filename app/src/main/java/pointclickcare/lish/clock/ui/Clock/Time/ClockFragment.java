@@ -47,11 +47,8 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         super.onCreate(savedInstanceState);
 
         String uri = "content://pointclickcare.lish.clock.ui.Clock.Time.ClockContentProvider/zones";
-
         Uri zones = Uri.parse(uri);
-
         ContentResolver cr = getActivity().getContentResolver();
-
         Cursor cursor = cr.query(zones, null, null, null, "ZONE_NAME");
 
         if (cursor != null)
@@ -68,7 +65,6 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_clock, container, false);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clock, container, false);
         View view = binding.getRoot();
         Clock clock = new Clock();
