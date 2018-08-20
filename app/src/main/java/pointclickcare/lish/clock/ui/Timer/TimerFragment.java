@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.Timer;
+package pointclickcare.lish.clock.ui.Timer;
 
 
 import android.os.Bundle;
