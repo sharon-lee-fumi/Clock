@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/black"
         android:orientation="vertical"
-        tools:context=".Timer.TimerFragment">
+        tools:context=".ui.Timer.TimerFragment">
 
         <!-- TODO: Update blank fragment layout -->
 

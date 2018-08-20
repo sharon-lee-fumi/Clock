@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.Timer;
+package pointclickcare.lish.clock.ui.Timer;
 
 
 import android.databinding.DataBindingUtil;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,15 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
                 }
         );
 
+        binding.timerDeleteBtn.setOnClickListener(
+                viewBtn ->{
+                    Fragment newTimer = TimerFragment.getInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.runTimerPlaceholder, newTimer, "newTimer");
+                    transaction.commit();
+                }
+        );
+
         return view;
     }
 
@@ -111,4 +121,5 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         }
 
     };
+
 }

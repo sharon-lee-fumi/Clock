@@ -16,8 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import pointclickcare.lish.clock.R;
-import pointclickcare.lish.clock.Timer.RunTimerFragment;
-import pointclickcare.lish.clock.Timer.TimerFragment;
+import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
 import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 Fragment runTimer = RunTimerFragment.newInstance();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.timerPlaceholder, runTimer);
+                                transaction.replace(R.id.timerPlaceholder, runTimer, "fragment");
                                 transaction.commit();
                             }
                         }
