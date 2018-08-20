@@ -106,7 +106,7 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
     </style>
 
-    <style name="StopwatchButtonStyle">
+    <style name="ResetButtonStyle">
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>

@@ -1,4 +1,4 @@
-package pointclickcare.lish.clock.ui;
+package pointclickcare.lish.clock.Timer;
 
 
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.databinding.DataBindingUtil;
-import android.widget.AdapterView;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentTimerBinding;
+import pointclickcare.lish.clock.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.Timer.RunTimerFragment;
+import pointclickcare.lish.clock.Timer.TimerFragment;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
 import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
@@ -65,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         iconId = android.R.drawable.ic_media_play;
+                        //iconId = android.R.drawable.ic_media_pause;
                         break;
                     case 2:
+                        iconId = android.R.drawable.ic_media_play;
                     default:
                         break;
                 }
@@ -87,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
                             if (tab.getPosition() == 1) {
                                 AddClock();
+                            }
+                            if (tab.getPosition() == 2)
+                            {
+                                Fragment runTimer = RunTimerFragment.newInstance();
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.timerPlaceholder, runTimer);
+                                transaction.commit();
                             }
                         }
                     });
@@ -155,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return ClockFragment.getInstance();
                 case 3:
-                    return TimerFragment.getInstance();
+                    //return TimerFragment.getInstance();
+                    return RunTimerFragment.newInstance();
                 case 4:
                     return StopwatchFragment.getInstance();
                 default:
