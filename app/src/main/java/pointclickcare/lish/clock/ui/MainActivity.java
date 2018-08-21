@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
 import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
+import pointclickcare.lish.clock.ui.Timer.TimerFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    StopwatchFragment stopwatchFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +100,15 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 Fragment runTimer = RunTimerFragment.newInstance();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.timerPlaceholder, runTimer, "fragment");
+                                transaction.replace(R.id.runTimerPlaceholder, runTimer, "runTimer");
                                 transaction.commit();
+                            }
+                            if (tab.getPosition() == 3) {
+                                Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
+                                if (fragment instanceof StopwatchFragment) {
+                                    StopwatchFragment stopwatchFragment = (StopwatchFragment) fragment;
+                                    stopwatchFragment.runStopWatch();
+                                }
                             }
                         }
                     });
@@ -181,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        SparseArray<Fragment> fragmentList = new SparseArray<>();
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -190,7 +202,13 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment = PlaceholderFragment.newInstance(position + 1);
+            fragmentList.put(position, fragment);
+            return fragment;
+        }
+
+        public Fragment getFragmentAtPosition(int position) {
+            return fragmentList.get(position);
         }
 
         @Override
