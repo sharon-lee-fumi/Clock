@@ -19,11 +19,11 @@ import pointclickcare.lish.clock.databinding.FragmentStopwatchBinding;
  */
 public class StopwatchFragment extends MainActivity.PlaceholderFragment {
     FragmentStopwatchBinding binding;
-    Long MillisecondTime = 0L;
-    Long StartTime = 0L;
-    Long TimeBuff = 0L;
-    Long UpdateTime = 0L;
-    int Seconds, Minutes, MilliSeconds;
+    Long millisecondTime = 0L;
+    Long startTime = 0L;
+    Long timeBuff = 0L;
+    Long updateTime = 0L;
+    int seconds, minutes, milliSeconds;
 
     boolean imgBtnRunStatus = false;
 
@@ -49,30 +49,19 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
         handler = new Handler();
         binding.imgBtnRun.setOnClickListener(
                 viewBtn ->{
-                    if (!imgBtnRunStatus) {
-                        StartTime = SystemClock.uptimeMillis();
-                        handler.postDelayed(runnable, 0);
-                        imgBtnRunStatus = true;
-                    }
-                    else
-                    {
-                        TimeBuff += MillisecondTime;
-                        handler.removeCallbacks(runnable);
-                        imgBtnRunStatus = false;
-                    }
-                    binding.resetBtn.setVisibility(View.VISIBLE);
+                    runStopWatch();
                 }
         );
 
         binding.resetBtn.setOnClickListener(
                 viewBtn ->{
-                    MillisecondTime = 0L ;
-                    StartTime = 0L ;
-                    TimeBuff = 0L ;
-                    UpdateTime = 0L ;
-                    Seconds = 0 ;
-                    Minutes = 0 ;
-                    MilliSeconds = 0 ;
+                    millisecondTime = 0L ;
+                    startTime = 0L ;
+                    timeBuff = 0L ;
+                    updateTime = 0L ;
+                    seconds = 0 ;
+                    minutes = 0 ;
+                    milliSeconds = 0 ;
 
                     binding.stopwatchM.setText("");
                     binding.stopwatchS.setText("0");
@@ -87,19 +76,34 @@ public class StopwatchFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
+    public void runStopWatch() {
+        if (!imgBtnRunStatus) {
+            startTime = SystemClock.uptimeMillis();
+            handler.postDelayed(runnable, 0);
+            imgBtnRunStatus = true;
+        }
+        else
+        {
+            timeBuff += millisecondTime;
+            handler.removeCallbacks(runnable);
+            imgBtnRunStatus = false;
+        }
+        binding.resetBtn.setVisibility(View.VISIBLE);
+    }
+
     public Runnable runnable = new Runnable() {
 
         public void run() {
 
-            MillisecondTime = SystemClock.uptimeMillis() - StartTime;
-            UpdateTime = TimeBuff + MillisecondTime;
-            Seconds = (int) (UpdateTime / 1000);
-            Minutes = Seconds / 60;
-            Seconds = Seconds % 60;
-            MilliSeconds = (int) (UpdateTime % 100);
-            binding.stopwatchM.setText(String.format("%02d",Minutes));
-            binding.stopwatchS.setText(":" + String.format("%02d",Seconds));
-            binding.stopwatchMs.setText(String.format("%02d",MilliSeconds));
+            millisecondTime = SystemClock.uptimeMillis() - startTime;
+            updateTime = timeBuff + millisecondTime;
+            seconds = (int) (updateTime / 1000);
+            minutes = seconds / 60;
+            seconds = seconds % 60;
+            milliSeconds = (int) (updateTime % 100);
+            binding.stopwatchM.setText(String.format("%02d", minutes));
+            binding.stopwatchS.setText(":" + String.format("%02d", seconds));
+            binding.stopwatchMs.setText(String.format("%02d", milliSeconds));
 
             handler.postDelayed(this, 0);
         }
