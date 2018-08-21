@@ -1,11 +1,11 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
-import android.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.AlarmDayBinding;
@@ -67,10 +67,25 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                     mAlarmList.get(position).selected = true;
                     binding.setAlarmSettingView(mAlarmList.get(position).selected);
 
+                    binding.alarmSetting.setAlarmDaysSetting(mAlarmList.get(position).alarmData);
+
+                    binding.alarmSetting.alarmSettingRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isChecked) {
+                                binding.alarmSetting.daysSetting.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.alarmSetting.daysSetting.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+
                     AlarmDayBinding[] bindingsForAlarmDayButton = {binding.alarmSetting.alarmDayBtnSun,
                             binding.alarmSetting.alarmDayBtnMon, binding.alarmSetting.alarmDayBtnTue,
                             binding.alarmSetting.alarmDayBtnWed, binding.alarmSetting.alarmDayBtnThu,
                             binding.alarmSetting.alarmDayBtnFri, binding.alarmSetting.alarmDayBtnSat};
+
+
                     AlarmData ad =  mAlarmList.get(position).alarmData;
                     for (int i =0; i < ad.alarmDayBtns.length; i++)
                     {
