@@ -1,10 +1,15 @@
 package pointclickcare.lish.clock.ui.Timer;
 
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -13,6 +18,7 @@ import android.view.ViewGroup;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentRunTimerBinding;
+import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Timer;
 import pointclickcare.lish.clock.ui.MainActivity;
 
@@ -21,6 +27,7 @@ import pointclickcare.lish.clock.ui.MainActivity;
  */
 public class RunTimerFragment extends MainActivity.PlaceholderFragment {
     FragmentRunTimerBinding binding;
+    Timer timer;
     Long millisecondTime;
     Long startTime;
     Long timeBuff;
@@ -42,13 +49,19 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        timer = new Timer(19, 3);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_run_timer, container, false);
         View view = binding.getRoot();
 
-        Timer timer = new Timer(19, 3);
         minutes = timer.getMinutes() * 60;
         seconds = timer.getSeconds();
         timeBuff = (minutes + seconds) * 1000L;
@@ -97,7 +110,7 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
                 viewBtn ->{
                     Fragment newTimer = TimerFragment.getInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.runTimerPlaceholder, newTimer, "newTimer");
+                    transaction.replace(R.id.timerPlaceholder, newTimer, "newTimer");
                     transaction.commit();
                 }
         );

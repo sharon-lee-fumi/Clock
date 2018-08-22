@@ -98,10 +98,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if (tab.getPosition() == 2)
                             {
-                                Fragment runTimer = RunTimerFragment.newInstance();
-                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.runTimerPlaceholder, runTimer, "runTimer");
-                                transaction.commit();
+                                Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
+
+                                if (fragment instanceof TimerFragment) {
+                                    Fragment runTimer = RunTimerFragment.newInstance();
+                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.timerPlaceholder, runTimer, "runTimer");
+                                    transaction.commit();
+                                }
+
                             }
                             if (tab.getPosition() == 3) {
                                 Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
@@ -177,8 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return ClockFragment.getInstance();
                 case 3:
-                    //return TimerFragment.getInstance();
-                    return RunTimerFragment.newInstance();
+                    return TimerFragment.getInstance();
                 case 4:
                     return StopwatchFragment.getInstance();
                 default:
