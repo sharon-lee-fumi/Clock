@@ -28,7 +28,6 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
     List<Alarm> alarmList = new ArrayList<>();
     AlarmListAdapter adapter;
     FragmentAlarmBinding binding;
-    AlarmData data = new AlarmData();
 
     public AlarmFragment() {
         // Required empty public constructor
