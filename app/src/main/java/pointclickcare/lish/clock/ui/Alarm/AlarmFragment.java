@@ -88,7 +88,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
 
             alarm.setTime("8:00");
             alarm.setPeriod("AM");
-            alarm.setDays("Monday");
+            alarm.setDays("Tomorrow");
             alarmList.add(alarm);
         }
         return alarmList;

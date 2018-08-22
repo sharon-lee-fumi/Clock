@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -33,9 +34,6 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     TimeListAdapter adapter;
     FragmentClockBinding binding;
 
-    private SQLiteDatabase db;
-    //private Cursor cursor;
-
     public ClockFragment() {
         // Required empty public constructor
     }
@@ -45,21 +43,12 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_clock, container, false);
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clock, container, false);
-        View view = binding.getRoot();
-        Clock clock = new Clock();
-        binding.setClock(clock);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         String uri = "content://pointclickcare.lish.clock.ui.Clock.Time.ClockContentProvider/zones";
-
         Uri zones = Uri.parse(uri);
-
         ContentResolver cr = getActivity().getContentResolver();
-
         Cursor cursor = cr.query(zones, null, null, null, "ZONE_NAME");
 
         if (cursor != null)
@@ -70,6 +59,16 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
                 timeList.add(t);
             }
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clock, container, false);
+        View view = binding.getRoot();
+        Clock clock = new Clock();
+        binding.setClock(clock);
 
         adapter = new TimeListAdapter();
         adapter.setSource(timeList);

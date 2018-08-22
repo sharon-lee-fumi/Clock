@@ -43,7 +43,6 @@
 
     <string name="alarm_delete">Delete</string>
 
-
     <string name="title_activity_add_clock">AddClock</string>
 
     <string name="zone_info">Country: %1$s, Zone: %2$s, Time: %3$s</string>
@@ -54,5 +53,11 @@
     <string name="desc_provider_permission">Content Provider permission</string>
 
     <string name="add_clock_title">Add Clock</string>
+
+    <string name="reset">RESET</string>
+    <string name="delete">DELETE</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="timer"
+            type="pointclickcare.lish.clock.model.Timer" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/runTimerPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        tools:context=".ui.Timer.RunTimerFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timer_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@{timer.getFormattedMinutes}"
+                tools:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/timer_semicolon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text=":"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/timer_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@{timer.getFormattedSeconds}"
+                tools:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imgBtn_timerRun"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/oval" />
+
+        <Button
+            android:id="@+id/timerResetBtn"
+            style="@style/ResetButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="315dp"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/timerDeleteBtn"
+            style="@style/ResetButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="100dp"
+            android:text="@string/delete" />
+
+    </FrameLayout>
+</layout>

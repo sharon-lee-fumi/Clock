@@ -1,31 +1,46 @@
 package pointclickcare.lish.clock.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class Time {
-    private String countryName;
-    private Long gmtOffset;
+    private String zoneName;
+    private String period;
+    private long gmtOffset;
+    long calculatedTimeMillis;
 
-    public Time() {
-
-    }
-
-    public Time(String countryName, Long gmtOffset) {
-        this.countryName = countryName;
+    public Time(String zoneName, long gmtOffset) {
+        this.zoneName = zoneName;
         this.gmtOffset = gmtOffset;
     }
 
     public String getCountryName() {
-        return countryName;
+        return zoneName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public String getCalculatedTime() {
+        long unixTime = System.currentTimeMillis();
+        long localOffset = TimeZone.getDefault().getRawOffset();
+        calculatedTimeMillis = unixTime - localOffset + (this.gmtOffset * 1000L);
+
+        Date calculatedTime = new java.util.Date(calculatedTimeMillis);
+
+        return new SimpleDateFormat("hh:mm", Locale.getDefault()).format(calculatedTime);
     }
 
-    public Long getGmtOffset() {
-        return gmtOffset;
+    public String getFormattedPeriod() {
+        Date calculatedTime = new java.util.Date(calculatedTimeMillis);
+        return new SimpleDateFormat("a", Locale.getDefault()).format(calculatedTime);
     }
 
-    public void setGmtOffset(Long gmtOffset) {
-        this.gmtOffset = gmtOffset;
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 }

@@ -1,7 +1,6 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
 import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +39,6 @@ public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHo
     public int getItemCount() {
         return listTime.size();
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ListTimeBinding binding;

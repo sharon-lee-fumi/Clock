@@ -72,6 +72,12 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
     </style>
 
+    <style name="ClockPeriodStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+    </style>
+
     <style name="ZoneStyle">
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:background">@android:color/transparent</item>
@@ -98,6 +104,12 @@
 
     <style name="TimerButtonStyle" parent="TimerTextStyle">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display2</item>
+    </style>
+
+    <style name="ResetButtonStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
     </style>
 
 </resources>

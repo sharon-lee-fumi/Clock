@@ -1,37 +1,35 @@
 package pointclickcare.lish.clock.model;
 
 public class Timer {
-    private String h;
-    private String m;
-    private String s;
+    private int seconds;
+    private int minutes;
 
-    public Timer(String h, String m, String s) {
-        this.h = h;
-        this.m = m;
-        this.s = s;
+    public Timer(int seconds, int minutes) {
+        this.seconds = seconds;
+        this.minutes = minutes;
     }
 
-    public String getH() {
-        return h;
+    public int getSeconds() {
+        return seconds;
     }
 
-    public void setH(String h) {
-        this.h = h;
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
     }
 
-    public String getM() {
-        return m;
+    public int getMinutes() {
+        return minutes;
     }
 
-    public void setM(String m) {
-        this.m = m;
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 
-    public String getS() {
-        return s;
+    public String getFormattedSeconds() {
+        return String.format("%02d", this.seconds);
     }
 
-    public void setS(String s) {
-        this.s = s;
+    public String getFormattedMinutes() {
+        return String.format("%02d", this.minutes);
     }
 }

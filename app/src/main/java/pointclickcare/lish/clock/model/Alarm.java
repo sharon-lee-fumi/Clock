@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Alarm {
-    private AlarmData alarmData;
+
     private String time;
     private String period;
     private String days;
     //private boolean status;
+    //public boolean[] alarmDayBtns = new boolean[7];
     public boolean selected;
+
+    public AlarmData alarmData;
 
     public Alarm() {
         this.alarmData = this.getAlarmData();
@@ -18,6 +21,7 @@ public class Alarm {
         this.period = this.getPeriod();
         this.days = this.getDays();
         //this.status = this.getStatus();
+       // this.alarmDayBtns = this.getAlarmDayBtns();
         this.selected = false;
     }
 
@@ -62,6 +66,14 @@ public class Alarm {
     public void setDays(String days) {
         this.days = days;
     }
+
+/*    public boolean[] getAlarmDayBtns() {
+        return alarmDayBtns;
+    }
+
+    public void setAlarmDayBtns(boolean[] alarmDayBtns) {
+        this.alarmDayBtns = alarmDayBtns;
+    }*/
 
     public AlarmData getAlarmData() {
         return alarmData;
