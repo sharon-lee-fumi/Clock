@@ -17,10 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.model.Timer;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
 import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
 import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
+import pointclickcare.lish.clock.ui.Timer.SetTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.TimerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,7 +100,11 @@ public class MainActivity extends AppCompatActivity {
                             Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
 
                             if (fragment instanceof TimerFragment) {
-                                Fragment runTimer = RunTimerFragment.newInstance();
+
+                                SetTimerFragment setTimerFragment = (SetTimerFragment )fragment.getChildFragmentManager().findFragmentById(R.id.setTimerPlaceholder);
+                                Timer newTimer = setTimerFragment.setTimer();
+
+                                Fragment runTimer = RunTimerFragment.newInstance(newTimer);
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.timerPlaceholder, runTimer, "runTimer");
                                 transaction.commit();

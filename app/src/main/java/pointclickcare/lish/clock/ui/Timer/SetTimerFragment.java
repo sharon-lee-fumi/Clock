@@ -23,6 +23,7 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
     private int hours;
     private int seconds;
     private int minutes;
+    public Timer timer;
 
     public SetTimerFragment() {
         // Required empty public constructor
@@ -83,13 +84,13 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
         binding.h.setText(String.format("%01d", displayTimer[5]) + String.format("%01d", displayTimer[4]));
     }
 
-    public  void setTimer()
+    public Timer setTimer()
     {
         hours = (displayTimer[5] *10 + displayTimer[4]);
         minutes = (displayTimer[3] *10 + displayTimer[2]);
         seconds = (displayTimer[1] *10 + displayTimer[0]);
-        Timer timer = new Timer(seconds, minutes, hours);
+        timer = new Timer(seconds, minutes, hours);
+        return timer;
     }
-
 
 }
