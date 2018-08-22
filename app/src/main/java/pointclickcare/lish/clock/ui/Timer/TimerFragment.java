@@ -36,7 +36,7 @@ public class TimerFragment extends MainActivity.PlaceholderFragment {
 
         Fragment setTimer = SetTimerFragment.getInstance();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.timerPlaceholder, setTimer, "setTimer");
+        transaction.add(R.id.timerPlaceholder, setTimer, "setTimer");
         transaction.commit();
 
         return view;
