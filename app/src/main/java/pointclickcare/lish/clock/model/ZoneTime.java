@@ -2,7 +2,7 @@ package pointclickcare.lish.clock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ZoneTime extends Response{
+public class ZoneTime extends Response {
     @SerializedName("countryCode")
     private String countryCode;
 

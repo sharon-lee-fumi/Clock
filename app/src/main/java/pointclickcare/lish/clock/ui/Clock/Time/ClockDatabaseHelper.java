@@ -19,8 +19,15 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
             ZONE_NAME + " TEXT," +
             GMT_OFFSET + " INTEGER);";
 
-    ClockDatabaseHelper (Context context) {
+    ClockDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    private static void insertTime(SQLiteDatabase db, String zoneName, long gmtOffset) {
+        ContentValues zoneValues = new ContentValues();
+        zoneValues.put("ZONE_NAME", zoneName);
+        zoneValues.put("GMT_OFFSET", gmtOffset);
+        db.insert(TABLE_ZONE, null, zoneValues);
     }
 
     @Override
@@ -40,15 +47,7 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
             insertTime(db, "Asia/Tokyo", 32400);
             insertTime(db, "Pacific/Chatham", 45900);
             insertTime(db, "America/New_York", -14400);
-            }
-    }
-
-    private static void insertTime(SQLiteDatabase db, String zoneName, long gmtOffset)
-    {
-        ContentValues zoneValues = new ContentValues();
-        zoneValues.put("ZONE_NAME", zoneName);
-        zoneValues.put("GMT_OFFSET", gmtOffset);
-        db.insert(TABLE_ZONE, null, zoneValues);
+        }
     }
 
 }

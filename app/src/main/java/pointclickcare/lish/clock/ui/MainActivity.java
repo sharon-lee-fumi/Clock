@@ -17,14 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import pointclickcare.lish.clock.R;
-import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
 import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
+import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.TimerFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    StopwatchFragment stopwatchFragment = null;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -34,13 +35,10 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
-    StopwatchFragment stopwatchFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,34 +87,33 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                    fab.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view) {
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                            if (tab.getPosition() == 1) {
-                                AddClock();
+                        if (tab.getPosition() == 1) {
+                            AddClock();
+                        }
+                        if (tab.getPosition() == 2) {
+                            Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
+
+                            if (fragment instanceof TimerFragment) {
+                                Fragment runTimer = RunTimerFragment.newInstance();
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.timerPlaceholder, runTimer, "runTimer");
+                                transaction.commit();
                             }
-                            if (tab.getPosition() == 2)
-                            {
-                                Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
 
-                                if (fragment instanceof TimerFragment) {
-                                    Fragment runTimer = RunTimerFragment.newInstance();
-                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.timerPlaceholder, runTimer, "runTimer");
-                                    transaction.commit();
-                                }
-
-                            }
-                            if (tab.getPosition() == 3) {
-                                Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
-                                if (fragment instanceof StopwatchFragment) {
-                                    StopwatchFragment stopwatchFragment = (StopwatchFragment) fragment;
-                                    stopwatchFragment.runStopWatch();
-                                }
+                        }
+                        if (tab.getPosition() == 3) {
+                            Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
+                            if (fragment instanceof StopwatchFragment) {
+                                StopwatchFragment stopwatchFragment = (StopwatchFragment) fragment;
+                                stopwatchFragment.runStopWatch();
                             }
                         }
-                    });
+                    }
+                });
             }
 
             @Override
@@ -155,6 +152,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void AddClock() {
+        Intent intent = new Intent(this, AddClockActivity.class);
+        //intent.putExtra(Extra.DATA, "Data from Clock");
+        startActivity(intent);
     }
 
     /**
@@ -220,11 +223,5 @@ public class MainActivity extends AppCompatActivity {
             // Show 4 total pages.
             return 4;
         }
-    }
-
-    public void AddClock(){
-        Intent intent = new Intent(this, AddClockActivity.class);
-        //intent.putExtra(Extra.DATA, "Data from Clock");
-        startActivity(intent);
     }
 }

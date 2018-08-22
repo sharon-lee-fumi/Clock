@@ -8,28 +8,23 @@
         <!-- access to the View properties by importing the object into the template-->
 
         <variable
-            name="alarmSetting"
+            name="showDaysSetting"
             type="boolean" />
 
         <variable
-            name="daysSetting"
-            type="boolean" />
-
-        <variable
-            name="alarmDaysSetting"
+            name="alarmData"
             type="pointclickcare.lish.clock.model.AlarmData" />
 
     </data>
 
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".ui.Alarm.AlarmSettingFragment"
-        android:visibility="@{alarmSetting ? View.VISIBLE : View.GONE}">
+        android:visibility="@{showDaysSetting ? View.VISIBLE : View.GONE}"
+        tools:context=".ui.Alarm.AlarmSettingFragment">
 
 
         <!-- TODO: Update blank fragment layout -->
@@ -38,8 +33,8 @@
             style="@style/AlarmDaysStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@={alarmDaysSetting.repeat}"
-            android:text="@string/alarm_setting_repeat"/>
+            android:checked="@={alarmData.repeat}"
+            android:text="@string/alarm_setting_repeat" />
 
         <LinearLayout
             android:id="@+id/days_setting"
@@ -47,49 +42,56 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="@{View.GONE}">
+            android:visibility="@{alarmData.repeat ? View.VISIBLE : View.GONE}">
 
             <include
                 android:id="@+id/alarm_dayBtn_sun"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_sun}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[0]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{0}"
+                bind:dayStr="@{@string/days_short_string_sun}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_mon"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_mon}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[1]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{1}"
+                bind:dayStr="@{@string/days_short_string_mon}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_tue"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_tue}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[2]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{2}"
+                bind:dayStr="@{@string/days_short_string_tue}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_wed"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_wed}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[3]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{3}"
+                bind:dayStr="@{@string/days_short_string_wed}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_thu"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_thu}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[4]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{4}"
+                bind:dayStr="@{@string/days_short_string_thu}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_fri"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_fri}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[5]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{5}"
+                bind:dayStr="@{@string/days_short_string_fri}" />
 
             <include
                 android:id="@+id/alarm_dayBtn_sat"
                 layout="@layout/alarm_day"
-                bind:dayStr="@{@string/days_short_string_sat}"
-                bind:selectedDay="@{alarmDaysSetting.alarmDayBtns[6]}" />
+                bind:alarmData="@{alarmData}"
+                bind:day="@{6}"
+                bind:dayStr="@{@string/days_short_string_sat}" />
         </LinearLayout>
 
         <include layout="@layout/vertical_divider" />
@@ -120,7 +122,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
             <ImageButton
-                android:id="@+id/btn_hide"
+                android:id="@+id/btn_collapse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
