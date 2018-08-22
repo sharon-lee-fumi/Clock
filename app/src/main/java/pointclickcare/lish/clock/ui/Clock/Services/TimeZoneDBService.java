@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface TimeZoneDBService {
-    String baseUrl ="http://api.timezonedb.com/";
+    String baseUrl = "http://api.timezonedb.com/";
     String apiKey = "YJE13E075YMW";
 
     @GET("v2/list-time-zone")

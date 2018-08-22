@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.AlarmDayBinding;
 import pointclickcare.lish.clock.databinding.ListAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
 import pointclickcare.lish.clock.model.AlarmData;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
     List<Alarm> mAlarmList = new ArrayList<>();
@@ -41,6 +41,16 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         return mAlarmList.size();
     }
 
+    private void notifyClickEvent(View view) {
+        for (ClickEventListener listener : observers) {
+            listener.onClicked(view);
+        }
+    }
+
+    interface ClickEventListener {
+        void onClicked(View view);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ListAlarmBinding binding;
 
@@ -52,15 +62,11 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
                 int position = getAdapterPosition();
                 notifyClickEvent(itemView);
-                if(mAlarmList.get(position).selected == true)
-                {
+                if (mAlarmList.get(position).selected == true) {
                     mAlarmList.get(position).selected = false;
                     binding.setAlarmSettingView(mAlarmList.get(position).selected);
-                }
-                else
-                {
-                    for(int i = 0; i < getItemCount(); i++)
-                    {
+                } else {
+                    for (int i = 0; i < getItemCount(); i++) {
                         mAlarmList.get(i).selected = false;
                         observers.add(viewList -> binding.setAlarmSettingView(false));
                     }
@@ -86,9 +92,8 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                             binding.alarmSetting.alarmDayBtnFri, binding.alarmSetting.alarmDayBtnSat};
 
 
-                    AlarmData ad =  mAlarmList.get(position).alarmData;
-                    for (int i =0; i < ad.alarmDayBtns.length; i++)
-                    {
+                    AlarmData ad = mAlarmList.get(position).alarmData;
+                    for (int i = 0; i < ad.alarmDayBtns.length; i++) {
                         int finalI = i;
                         bindingsForAlarmDayButton[i].alarmDaysContainer.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
@@ -107,15 +112,5 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                 }
             });
         }
-    }
-
-    private void notifyClickEvent(View view) {
-        for (ClickEventListener listener : observers) {
-            listener.onClicked(view);
-        }
-    }
-
-    interface ClickEventListener {
-        void onClicked(View view);
     }
 }

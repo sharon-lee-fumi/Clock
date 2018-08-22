@@ -12,9 +12,8 @@ import java.util.List;
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.ListTimeBinding;
 import pointclickcare.lish.clock.model.Time;
-import pointclickcare.lish.clock.model.ZoneTime;
 
-public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHolder>{
+public class TimeListAdapter extends RecyclerView.Adapter<TimeListAdapter.ViewHolder> {
     private List<Time> listTime = new ArrayList<>();
 
     public void setSource(List<Time> list) {

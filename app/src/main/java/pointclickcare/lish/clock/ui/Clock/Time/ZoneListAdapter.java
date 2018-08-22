@@ -6,15 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pointclickcare.lish.clock.R;
-import pointclickcare.lish.clock.model.Zone;
-import pointclickcare.lish.clock.databinding.ListZoneBinding;
-import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHolder>{
+import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.databinding.ListZoneBinding;
+import pointclickcare.lish.clock.model.Zone;
+import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
+
+public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHolder> {
     private List<Zone> listZone = new ArrayList<>();
 
     public void setSource(List<Zone> list) {

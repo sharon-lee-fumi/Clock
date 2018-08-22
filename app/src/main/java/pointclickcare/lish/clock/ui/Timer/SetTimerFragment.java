@@ -1,12 +1,12 @@
 package pointclickcare.lish.clock.ui.Timer;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.databinding.DataBindingUtil;
 import android.widget.Button;
 
 import pointclickcare.lish.clock.R;
@@ -35,7 +35,7 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_timer, container, false);
         View view = binding.getRoot();
 
-        Button[] timerButtons =  {binding.btn0, binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5,
+        Button[] timerButtons = {binding.btn0, binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5,
                 binding.btn6, binding.btn7, binding.btn8, binding.btn9};
         for (int i = 0; i < timerButtons.length; i++) {
             int finalI = i;
@@ -47,17 +47,15 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
         }
 
         binding.btnDelete.setOnClickListener(
-                viewBtn ->{
+                viewBtn -> {
                     delete();
                 }
         );
         return view;
     }
 
-    private void update(int btn)
-    {
-        if (timer[5] == 0)
-        {
+    private void update(int btn) {
+        if (timer[5] == 0) {
             for (int i = timer.length - 1; i > 0; i--) {
                 timer[i] = timer[i - 1];
             }
@@ -68,10 +66,9 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
         }
     }
 
-    private void delete()
-    {
+    private void delete() {
         for (int i = 1; i < timer.length; i++) {
-            timer[i-1] = timer[i];
+            timer[i - 1] = timer[i];
         }
         timer[5] = 0;
         binding.s.setText(String.format("%01d", timer[1]) + String.format("%01d", timer[0]));
