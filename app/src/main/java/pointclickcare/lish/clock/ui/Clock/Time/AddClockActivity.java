@@ -71,6 +71,7 @@ public class AddClockActivity extends AppCompatActivity {
 
         binding.backToClockButton.setOnClickListener(
                 viewBtn -> {
+
                     Intent intent = new Intent(this, MainActivity.class);
                     //intent.putExtra(Extra.DATA, "Data from Activity 1");
                     startActivity(intent);
