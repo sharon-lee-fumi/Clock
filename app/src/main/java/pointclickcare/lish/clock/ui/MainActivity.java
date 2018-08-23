@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +23,7 @@ import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
 import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.SetTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.TimerFragment;
+import pointclickcare.lish.clock.util.UiUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,38 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         fab.setVisibility(View.GONE);
                     }
                 }
-
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (tab.getPosition() == 1) {
-                            AddClock();
-                        }
-                        if (tab.getPosition() == 2) {
-                            Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
-
-                            if (fragment instanceof TimerFragment) {
-
-                                SetTimerFragment setTimerFragment = (SetTimerFragment )fragment.getChildFragmentManager().findFragmentById(R.id.setTimerPlaceholder);
-                                Timer newTimer = setTimerFragment.setTimer();
-
-                                Fragment runTimer = RunTimerFragment.newInstance(newTimer);
-                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.timerPlaceholder, runTimer, "runTimer");
-                                transaction.commit();
-                            }
-
-                        }
-                        if (tab.getPosition() == 3) {
-                            Fragment fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
-                            if (fragment instanceof StopwatchFragment) {
-                                StopwatchFragment stopwatchFragment = (StopwatchFragment) fragment;
-                                stopwatchFragment.runStopWatch();
-                            }
-                        }
-                    }
-                });
             }
 
             @Override
@@ -130,6 +98,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Fragment fragment;
+            int tabPosition = tabLayout.getSelectedTabPosition();
+
+            switch (tabPosition) {
+                case 1:
+                    AddClock();
+                    break;
+                case 2:
+                    fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
+
+                    if (fragment instanceof TimerFragment) {
+                        Fragment fragmentPlaceholder = fragment.getFragmentManager().findFragmentById(R.id.timerPlaceholder);
+                        if (fragmentPlaceholder != null && fragmentPlaceholder instanceof SetTimerFragment) {
+                            SetTimerFragment setTimerFragment = (SetTimerFragment) fragmentPlaceholder;
+                            Timer newTimer = setTimerFragment.getTimer();
+
+                            Fragment runTimer = RunTimerFragment.newInstance(newTimer);
+                            UiUtil.switchFragment(getSupportFragmentManager(), R.id.timerPlaceholder, runTimer);
+                        }
+                    }
+                    break;
+                case 3:
+                    fragment = mSectionsPagerAdapter.getFragmentAtPosition(3);
+                    if (fragment instanceof StopwatchFragment) {
+                        StopwatchFragment stopwatchFragment = (StopwatchFragment) fragment;
+                        stopwatchFragment.runStopWatch();
+                    }
+                    break;
             }
         });
 

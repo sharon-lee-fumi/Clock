@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmSettingBinding;
-import pointclickcare.lish.clock.util.Extra;
+import pointclickcare.lish.clock.util.Extras;
 
 
 /**
@@ -30,7 +30,7 @@ public class AlarmSettingFragment extends Fragment {
     public static AlarmSettingFragment newInstance(String message) {
         AlarmSettingFragment fragment = new AlarmSettingFragment();
         Bundle args = new Bundle();
-        args.putString(Extra.ALARM, message);
+        args.putString(Extras.ALARM, message);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,7 +39,7 @@ public class AlarmSettingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.message = getArguments().getString(Extra.ALARM);
+            this.message = getArguments().getString(Extras.ALARM);
         }
     }
 
