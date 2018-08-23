@@ -53,6 +53,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
             itemView.setOnClickListener((view) ->
                     new TimeZoneDBClient().getZoneTime(zone.getZoneName())
             );
+
         }
     }
 }
