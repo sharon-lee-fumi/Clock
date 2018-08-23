@@ -1,11 +1,7 @@
 package pointclickcare.lish.clock.ui.Timer;
 
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -16,13 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.Serializable;
-
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentRunTimerBinding;
-import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Timer;
 import pointclickcare.lish.clock.ui.MainActivity;
+import pointclickcare.lish.clock.util.Extras;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +33,27 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
     boolean imgBtnTimerRunStatus = false;
 
     Handler handler;
+    public Runnable runnable = new Runnable() {
+
+        public void run() {
+
+            millisecondTime = SystemClock.uptimeMillis() - startTime;
+            updateTime = timeBuff - millisecondTime;
+            seconds = (int) (updateTime / 1000);
+            hours = seconds / 3600;
+            seconds = seconds % 3600;
+            minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            binding.setTimer(newTimer);
+            /*binding.timerH.setText(String.format("%02d", hours));
+            binding.timerM.setText(String.format("%02d", minutes));
+            binding.timerS.setText(String.format("%02d", seconds));*/
+
+            handler.postDelayed(this, 0);
+        }
+
+    };
 
     public RunTimerFragment() {
         // Required empty public constructor
@@ -47,7 +62,7 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
     public static RunTimerFragment newInstance(Timer timer) {
         RunTimerFragment runTimerFragment = new RunTimerFragment();
         Bundle args = new Bundle();
-        args.putSerializable("mTimer", (Serializable) timer);
+        args.putSerializable(Extras.TIMER, timer);
         runTimerFragment.setArguments(args);
         return runTimerFragment;
     }
@@ -67,31 +82,36 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_run_timer, container, false);
         View view = binding.getRoot();
 
-        newTimer = (Timer) getArguments().getSerializable("mTimer");
+        newTimer = (Timer) getArguments().getSerializable(Extras.TIMER);
 
         hours = newTimer.getHours() * 3600;
         minutes = newTimer.getMinutes() * 60;
         seconds = newTimer.getSeconds();
         timeBuff = (hours + minutes + seconds) * 1000L;
 
+        binding.setTimer(newTimer);
+/*
+
         binding.timerM.setText(String.format("%02d", hours));
         binding.timerM.setText(String.format("%02d", minutes));
         binding.timerS.setText(String.format("%02d", seconds));
+*/
 
         binding.timerResetBtn.setVisibility(View.INVISIBLE);
 
         handler = new Handler();
         binding.imgBtnTimerRun.setOnClickListener(
-                viewBtn ->{
+                viewBtn -> {
                     runTimer();
                 }
         );
 
         binding.timerResetBtn.setOnClickListener(
-                viewBtn ->{
-                    binding.timerH.setText(String.format("%02d", newTimer.getHours()));
+                viewBtn -> {
+                    binding.setTimer(newTimer);
+                    /*binding.timerH.setText(String.format("%02d", newTimer.getHours()));
                     binding.timerM.setText(String.format("%02d", newTimer.getMinutes()));
-                    binding.timerS.setText(String.format("%02d", newTimer.getSeconds()));
+                    binding.timerS.setText(String.format("%02d", newTimer.getSeconds()));*/
 
                     hours = newTimer.getHours() * 3600;
                     minutes = newTimer.getMinutes() * 60;
@@ -104,7 +124,7 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         );
 
         binding.timerDeleteBtn.setOnClickListener(
-                viewBtn ->{
+                viewBtn -> {
                     Fragment newTimer = TimerFragment.getInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.timerPlaceholder, newTimer, "newTimer");
@@ -115,41 +135,18 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
-    public void runTimer()
-    {
+    public void runTimer() {
         if (!imgBtnTimerRunStatus) {
             startTime = SystemClock.uptimeMillis();
             handler.postDelayed(runnable, 0);
             imgBtnTimerRunStatus = true;
             binding.timerResetBtn.setVisibility(View.INVISIBLE);
-        }
-        else
-        {
+        } else {
             timeBuff -= millisecondTime;
             handler.removeCallbacks(runnable);
             imgBtnTimerRunStatus = false;
             binding.timerResetBtn.setVisibility(View.VISIBLE);
         }
     }
-
-    public Runnable runnable = new Runnable() {
-
-        public void run() {
-
-            millisecondTime = SystemClock.uptimeMillis() - startTime;
-            updateTime = timeBuff - millisecondTime;
-            seconds = (int) (updateTime / 1000);
-            hours = seconds / 3600;
-            seconds = seconds % 3600;
-            minutes = seconds / 60;
-            seconds = seconds % 60;
-            binding.timerH.setText(String.format("%02d", hours));
-            binding.timerM.setText(String.format("%02d", minutes));
-            binding.timerS.setText(String.format("%02d", seconds));
-
-            handler.postDelayed(this, 0);
-        }
-
-    };
 
 }

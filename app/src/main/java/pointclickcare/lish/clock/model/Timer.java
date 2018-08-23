@@ -1,6 +1,8 @@
 package pointclickcare.lish.clock.model;
 
-public class Timer {
+import java.io.Serializable;
+
+public class Timer implements Serializable {
     private int hours;
     private int seconds;
     private int minutes;

@@ -4,7 +4,6 @@ package pointclickcare.lish.clock.ui.Timer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentTimerBinding;
 import pointclickcare.lish.clock.ui.MainActivity;
+import pointclickcare.lish.clock.util.UiUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +34,8 @@ public class TimerFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timer, container, false);
         View view = binding.getRoot();
 
-        Fragment setTimer = SetTimerFragment.getInstance();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.timerPlaceholder, setTimer, "setTimer");
-        transaction.commit();
+        Fragment fragmentSetTimer = SetTimerFragment.getInstance();
+        UiUtil.switchFragment(getActivity().getSupportFragmentManager(), R.id.timerPlaceholder, fragmentSetTimer);
 
         return view;
     }
