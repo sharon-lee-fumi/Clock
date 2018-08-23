@@ -1,5 +1,6 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,16 +15,19 @@ import android.widget.Toast;
 import java.util.List;
 
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.databinding.ActivityAddClockBinding;
 import pointclickcare.lish.clock.databinding.ContentAddClockBinding;
 import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.model.ZoneList;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
+import pointclickcare.lish.clock.ui.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddClockActivity extends AppCompatActivity {
-    ContentAddClockBinding binding;
+    //ContentAddClockBinding binding;
+    ActivityAddClockBinding binding;
     ZoneListAdapter adapter;
     Callback<ZoneList> mZoneListCallback = new Callback<ZoneList>() {
         @Override
@@ -49,13 +53,30 @@ public class AddClockActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.add_clock_title);
         setSupportActionBar(toolbar);
-
+/*
         View contentView = findViewById(R.id.content_add_clock);
+        binding = DataBindingUtil.bind(contentView);*/
+
+        View contentView = findViewById(R.id.add_clock);
         binding = DataBindingUtil.bind(contentView);
+
         adapter = new ZoneListAdapter();
-        binding.listZone.setAdapter(adapter);
+/*        binding.listZone.setAdapter(adapter);
         binding.listZone.setLayoutManager(new LinearLayoutManager(this));
-        binding.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        binding.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));*/
+
+        binding.contentAddClock.listZone.setAdapter(adapter);
+        binding.contentAddClock.listZone.setLayoutManager(new LinearLayoutManager(this));
+        binding.contentAddClock.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        binding.backToClockButton.setOnClickListener(
+                viewBtn -> {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    //intent.putExtra(Extra.DATA, "Data from Activity 1");
+                    startActivity(intent);
+                }
+        );
+
     }
 
     @Override
