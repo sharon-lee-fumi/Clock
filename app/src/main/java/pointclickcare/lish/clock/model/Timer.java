@@ -1,12 +1,22 @@
 package pointclickcare.lish.clock.model;
 
 public class Timer {
+    private int hours;
     private int seconds;
     private int minutes;
 
-    public Timer(int seconds, int minutes) {
+    public Timer(int seconds, int minutes, int hours) {
         this.seconds = seconds;
         this.minutes = minutes;
+        this.hours = hours;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public int getSeconds() {
@@ -31,5 +41,9 @@ public class Timer {
 
     public String getFormattedMinutes() {
         return String.format("%02d", this.minutes);
+    }
+
+    public String getFormattedHours() {
+        return String.format("%02d", this.hours);
     }
 }

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ZoneList extends Response{
+public class ZoneList extends Response {
     @SerializedName("zones")
     List<Zone> zones;
 

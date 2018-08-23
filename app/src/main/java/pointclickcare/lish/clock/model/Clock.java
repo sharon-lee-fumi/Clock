@@ -1,9 +1,9 @@
 package pointclickcare.lish.clock.model;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Clock {
     private String time;

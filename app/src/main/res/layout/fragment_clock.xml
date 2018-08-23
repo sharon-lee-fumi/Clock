@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{clock.time}"
-                tools:text="8:00"/>
+                tools:text="8:00" />
 
             <TextView
                 android:id="@+id/period"
@@ -51,7 +51,7 @@
             android:layout_below="@+id/time_container"
             android:layout_centerHorizontal="true"
             android:text="@{clock.date}"
-            tools:text="Thu, Jul 12, 2018"/>
+            tools:text="Thu, Jul 12, 2018" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_time"

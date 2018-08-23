@@ -1,16 +1,15 @@
 package pointclickcare.lish.clock.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
 public class Time {
+    long calculatedTimeMillis;
     private String zoneName;
     private String period;
     private long gmtOffset;
-    long calculatedTimeMillis;
 
     public Time(String zoneName, long gmtOffset) {
         this.zoneName = zoneName;

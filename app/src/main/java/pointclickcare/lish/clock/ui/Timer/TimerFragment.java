@@ -1,14 +1,13 @@
 package pointclickcare.lish.clock.ui.Timer;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.databinding.DataBindingUtil;
-import android.widget.Button;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentTimerBinding;
@@ -37,7 +36,7 @@ public class TimerFragment extends MainActivity.PlaceholderFragment {
 
         Fragment setTimer = SetTimerFragment.getInstance();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.timerPlaceholder, setTimer, "setTimer");
+        transaction.add(R.id.timerPlaceholder, setTimer, "setTimer");
         transaction.commit();
 
         return view;

@@ -11,14 +11,13 @@ import android.widget.Toast;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmSettingBinding;
-
 import pointclickcare.lish.clock.util.Extra;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlarmSettingFragment extends Fragment{
+public class AlarmSettingFragment extends Fragment {
 
     FragmentAlarmSettingBinding binding;
     private boolean[] days = new boolean[7];
@@ -58,7 +57,7 @@ public class AlarmSettingFragment extends Fragment{
 
 
         AdapterView.OnItemClickListener itemClickListener =
-                new AdapterView.OnItemClickListener(){
+                new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> binding,
                                             View itemView,
@@ -66,7 +65,8 @@ public class AlarmSettingFragment extends Fragment{
                                             long id) {
                         Toast.makeText(getActivity(), "ok", Toast.LENGTH_LONG);
 
-                    }};
+                    }
+                };
 
         return view;
     }
