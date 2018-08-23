@@ -3,6 +3,7 @@ package pointclickcare.lish.clock.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -63,6 +64,10 @@ public class Zone {
     }
 
     public String getFormattedTime() {
-        return new SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).format(new Date(timestamp));
+        return new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(timestamp));
+    }
+
+    public String getFormattedPeriod() {
+        return new SimpleDateFormat("a", Locale.getDefault()).format(timestamp);
     }
 }

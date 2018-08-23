@@ -6,8 +6,12 @@ public class Timer implements Serializable {
     private int hours;
     private int seconds;
     private int minutes;
+    private Long timeBuff;
+    private int formattedHours;
+    private int formattedMinutes;
+    private int formattedSeconds;
 
-    public Timer(int seconds, int minutes, int hours) {
+    public Timer(int hours, int minutes, int seconds) {
         this.seconds = seconds;
         this.minutes = minutes;
         this.hours = hours;
@@ -37,15 +41,27 @@ public class Timer implements Serializable {
         this.minutes = minutes;
     }
 
+    public Long calculate()
+    {
+        timeBuff = (this.hours * 3600 + this.minutes * 60 + this.seconds) * 1000L;
+        return timeBuff;
+    }
+
     public String getFormattedSeconds() {
-        return String.format("%02d", this.seconds);
+        formattedSeconds = (int) (calculate() / 1000);
+        formattedHours = formattedSeconds / 3600;
+        formattedSeconds = formattedSeconds % 3600;
+        formattedMinutes = formattedSeconds / 60;
+        formattedSeconds = formattedSeconds % 60;
+
+        return String.format("%02d", formattedSeconds);
     }
 
     public String getFormattedMinutes() {
-        return String.format("%02d", this.minutes);
+        return String.format("%02d", formattedMinutes);
     }
 
     public String getFormattedHours() {
-        return String.format("%02d", this.hours);
+        return String.format("%02d", formattedHours);
     }
 }

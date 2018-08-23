@@ -11,11 +11,13 @@ import java.util.List;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.ListZoneBinding;
+import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
 
 public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHolder> {
     private List<Zone> listZone = new ArrayList<>();
+    public List<Time> savedZone = new ArrayList<>();
 
     public void setSource(List<Zone> list) {
         listZone = list;
