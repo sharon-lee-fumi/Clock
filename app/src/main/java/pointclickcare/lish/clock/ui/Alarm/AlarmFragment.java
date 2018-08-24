@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pointclickcare.lish.clock.R;
@@ -40,17 +41,14 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_alarm, container, false);
 
         alarmList = generateAlarmData(6);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
         View view = binding.getRoot();
 
-        adapter = new AlarmListAdapter();
+        adapter = new AlarmListAdapter(getContext());
         adapter.setSource(alarmList);
-        //adapter.setDaysString(getResources().getStringArray(R.array.daysString));
 
         binding.listAlarm.setAdapter(adapter);
         binding.listAlarm.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -61,7 +59,6 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         Fragment fragment = AlarmSettingFragment.newInstance(message);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.add(R.id.editDays, fragment, "fragment");
         transaction.commit();
         return view;
     }
@@ -71,23 +68,11 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
 
         for (int i = 0; i < count; i++) {
             Alarm alarm = new Alarm();
-            //alarm.time = new Date(new Date().getTime() + (long) (Math.random() * 10000));
             AlarmData alarmData = new AlarmData();
             alarm.setAlarmData(alarmData);
 
-            //alarmData.time.set("9:00");
-            //alarmData.period.set("PM");
-            alarmData.status.set(true);
-
-/*            Boolean[] days = new Boolean[7];
-            for (int j = 0; j < days.length; j++) {
-                days[j] = (long) (Math.random() * 100) % 2 != 0;
-            }*/
-            //alarm.days = days;
-
-            alarm.setTime("8:00");
-            alarm.setPeriod("AM");
-            alarm.setDays("Tomorrow");
+            alarm.status.set(true);
+            alarm.setTime(new Date(new Date().getTime() + (long) (Math.random() * 1000 * 23 * 3600)));
             alarmList.add(alarm);
         }
         return alarmList;

@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.time}"
+                android:text="@{alarm.timeStr}"
                 tools:text="8:00"/>
 
             <TextView
@@ -41,31 +41,32 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="@{alarm.period}"
+                android:text="@{alarm.amPmStr}"
                 tools:text="AM"/>
 
             <Switch
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:checked="@{alarm.status}" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/days"
+            android:id="@+id/days_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/daysItem"
+                android:id="@+id/days"
                 style="@style/AlarmDaysStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.days}"
+                android:text="@{alarm.alarmData.daysStr}"
                 tools:text="Tomorrow"/>
 
             <ImageButton

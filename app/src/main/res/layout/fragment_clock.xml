@@ -29,16 +29,16 @@
                 style="@style/LocalTimeStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{clock.time}"
+                android:text="@{clock.timeStr}"
                 tools:text="8:00" />
 
             <TextView
-                android:id="@+id/period"
+                android:id="@+id/ampm"
                 style="@style/LocalPeriodStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
-                android:text="@{clock.period}"
+                android:text="@{clock.amPmStr}"
                 tools:text="AM" />
         </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/time_container"
             android:layout_centerHorizontal="true"
-            android:text="@{clock.date}"
+            android:text="@{clock.dateStr}"
             tools:text="Thu, Jul 12, 2018" />
 
         <android.support.v7.widget.RecyclerView
