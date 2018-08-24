@@ -1,6 +1,10 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +78,11 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             itemView.setOnClickListener(view -> notifyClickEvent(view));
             binding.alarmSetting.btnCollapse.setOnClickListener(view -> toggleSettingView(false));
             binding.btnExpand.setOnClickListener(view -> toggleSettingView(false));
+
+            binding.alarmTime.setOnClickListener(view -> {
+                showTimePickerDialog(view);
+                    }
+            );
         }
 
         private void toggleSettingView(boolean forceCollapsing) {
@@ -83,5 +92,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             binding.btnExpand.setVisibility(alarm.selected ? View.INVISIBLE : View.VISIBLE);
             binding.setAlarm(alarm);
         }
+
+        public void showTimePickerDialog(View v) {
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "timePicker");
+        }
+
+
+
     }
 }
