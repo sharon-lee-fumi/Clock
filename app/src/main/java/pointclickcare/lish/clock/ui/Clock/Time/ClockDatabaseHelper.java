@@ -1,6 +1,5 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,13 +22,6 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    private static void insertTime(SQLiteDatabase db, String zoneName, long gmtOffset) {
-        ContentValues zoneValues = new ContentValues();
-        zoneValues.put("ZONE_NAME", zoneName);
-        zoneValues.put("GMT_OFFSET", gmtOffset);
-        db.insert(TABLE_ZONE, null, zoneValues);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         updateMyDatabase(db, 0, DB_VERSION);
@@ -43,10 +35,6 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL(SQL_CREATE_ZONES);
-
-            insertTime(db, "Asia/Tokyo", 32400);
-            insertTime(db, "Pacific/Chatham", 45900);
-            insertTime(db, "America/New_York", -14400);
         }
     }
 

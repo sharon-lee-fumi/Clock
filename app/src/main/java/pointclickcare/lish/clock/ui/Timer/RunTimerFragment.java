@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -45,10 +44,9 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
             minutes = seconds / 60;
             seconds = seconds % 60;
 
-            binding.setTimer(newTimer);
-            /*binding.timerH.setText(String.format("%02d", hours));
+            binding.timerH.setText(String.format("%02d", hours));
             binding.timerM.setText(String.format("%02d", minutes));
-            binding.timerS.setText(String.format("%02d", seconds));*/
+            binding.timerS.setText(String.format("%02d", seconds));
 
             handler.postDelayed(this, 0);
         }
@@ -68,14 +66,6 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        //timer = new Timer(19, 3, 0);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -83,19 +73,11 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         View view = binding.getRoot();
 
         newTimer = (Timer) getArguments().getSerializable(Extras.TIMER);
-
+        binding.setTimer(newTimer);
         hours = newTimer.getHours() * 3600;
         minutes = newTimer.getMinutes() * 60;
         seconds = newTimer.getSeconds();
         timeBuff = (hours + minutes + seconds) * 1000L;
-
-        binding.setTimer(newTimer);
-/*
-
-        binding.timerM.setText(String.format("%02d", hours));
-        binding.timerM.setText(String.format("%02d", minutes));
-        binding.timerS.setText(String.format("%02d", seconds));
-*/
 
         binding.timerResetBtn.setVisibility(View.INVISIBLE);
 
@@ -109,9 +91,6 @@ public class RunTimerFragment extends MainActivity.PlaceholderFragment {
         binding.timerResetBtn.setOnClickListener(
                 viewBtn -> {
                     binding.setTimer(newTimer);
-                    /*binding.timerH.setText(String.format("%02d", newTimer.getHours()));
-                    binding.timerM.setText(String.format("%02d", newTimer.getMinutes()));
-                    binding.timerS.setText(String.format("%02d", newTimer.getSeconds()));*/
 
                     hours = newTimer.getHours() * 3600;
                     minutes = newTimer.getMinutes() * 60;

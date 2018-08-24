@@ -27,21 +27,30 @@
             tools:text="CA" />
 
         <CheckBox
-            android:id="@+id/country_name"
+            android:id="@+id/zone_name"
             style="@style/ZoneStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false"
-            android:text="@{zoneInfo.countryName}"
-            tools:text="Canada" />
+            android:checked="@={zoneInfo.selected}"
+            android:text="@{zoneInfo.zoneName}"
+            tools:text="America\/Toronto" />
 
         <TextView
             android:id="@+id/formattedTime"
             style="@style/ZoneStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:text="@{zoneInfo.formattedTime}"
-            tools:text="May 23, 2018 13:00" />
+            tools:text="13:00" />
+
+        <TextView
+            android:id="@+id/formattedPeriod"
+            style="@style/ZoneStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{zoneInfo.formattedPeriod}"
+            tools:text="AM" />
     </LinearLayout>
 </layout>

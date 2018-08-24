@@ -1,24 +1,24 @@
 package pointclickcare.lish.clock.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.ObservableBoolean;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Zone {
+public class Zone extends BaseObservable {
+    public final ObservableBoolean selected = new ObservableBoolean();
     @SerializedName("countryCode")
     private String countryCode;
-
     @SerializedName("countryName")
     private String countryName;
-
     @SerializedName("zoneName")
     private String zoneName;
-
     @SerializedName("gmtOffset")
     private Long gmtOffset;
-
     @SerializedName("timestamp")
     private Long timestamp;
 
@@ -63,6 +63,10 @@ public class Zone {
     }
 
     public String getFormattedTime() {
-        return new SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault()).format(new Date(timestamp));
+        return new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(timestamp));
+    }
+
+    public String getFormattedPeriod() {
+        return new SimpleDateFormat("a", Locale.getDefault()).format(timestamp);
     }
 }

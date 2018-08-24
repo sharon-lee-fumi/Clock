@@ -11,10 +11,13 @@ import java.util.List;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.ListZoneBinding;
+import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
 
 public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHolder> {
+    public List<Time> savedZone = new ArrayList<>();
+    ListZoneBinding binding;
     private List<Zone> listZone = new ArrayList<>();
 
     public void setSource(List<Zone> list) {
@@ -23,7 +26,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ListZoneBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.list_zone, parent, false);
         return new ViewHolder(binding.getRoot(), binding);
     }
@@ -40,6 +43,16 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
         return listZone.size();
     }
 
+    public List<Time> getSavedZone() {
+        for (int i = 0; i < listZone.size(); i++) {
+            if (listZone.get(i).selected.get()) {
+                Time time = new Time(listZone.get(i).getZoneName(), listZone.get(i).getGmtOffset());
+                savedZone.add(time);
+            }
+        }
+        return savedZone;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         ListZoneBinding binding;
         Zone zone;
@@ -51,6 +64,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
             itemView.setOnClickListener((view) ->
                     new TimeZoneDBClient().getZoneTime(zone.getZoneName())
             );
+
         }
     }
 }

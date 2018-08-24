@@ -82,10 +82,10 @@ public class SetTimerFragment extends MainActivity.PlaceholderFragment {
     }
 
     public Timer getTimer() {
-        hours = (displayTimer[5] * 10 + displayTimer[4]);
-        minutes = (displayTimer[3] * 10 + displayTimer[2]);
-        seconds = (displayTimer[1] * 10 + displayTimer[0]);
-        timer = new Timer(seconds, minutes, hours);
+        hours = displayTimer[5] * 10 + displayTimer[4];
+        minutes = displayTimer[3] * 10 + displayTimer[2];
+        seconds = displayTimer[1] * 10 + displayTimer[0];
+        timer = new Timer(hours, minutes, seconds);
         return timer;
     }
 

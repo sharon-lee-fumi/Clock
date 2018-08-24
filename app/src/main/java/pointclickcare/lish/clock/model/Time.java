@@ -8,11 +8,26 @@ import java.util.TimeZone;
 public class Time {
     long calculatedTimeMillis;
     private String zoneName;
-    private String period;
     private long gmtOffset;
 
     public Time(String zoneName, long gmtOffset) {
         this.zoneName = zoneName;
+        this.gmtOffset = gmtOffset;
+    }
+
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
+
+    public long getGmtOffset() {
+        return gmtOffset;
+    }
+
+    public void setGmtOffset(long gmtOffset) {
         this.gmtOffset = gmtOffset;
     }
 
@@ -33,13 +48,5 @@ public class Time {
     public String getFormattedPeriod() {
         Date calculatedTime = new java.util.Date(calculatedTimeMillis);
         return new SimpleDateFormat("a", Locale.getDefault()).format(calculatedTime);
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
     }
 }
