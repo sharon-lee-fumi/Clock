@@ -1,14 +1,14 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,13 @@ import pointclickcare.lish.clock.databinding.ListAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
 
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
+    Context mContext;
     List<Alarm> mAlarmList = new ArrayList<>();
-    private List<ClickEventListener> observers = new ArrayList<>();
+    private List<View.OnClickListener> observers = new ArrayList<>();
+
+    public AlarmListAdapter(Context context) {
+        mContext = context;
+    }
 
     public void setSource(List<Alarm> list) {
         if (list == null) return;
@@ -45,16 +50,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
     }
 
     private void notifyClickEvent(View view) {
-        for (ClickEventListener listener : observers) {
-            listener.onClicked(view);
+        for (View.OnClickListener listener : observers) {
+            listener.onClick(view);
         }
     }
 
-    interface ClickEventListener {
-        void onClicked(View view);
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements TimePickerDialog.OnTimeSetListener {
         ListAlarmBinding binding;
 
         public ViewHolder(View itemView, ListAlarmBinding binding) {
@@ -78,27 +80,28 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             itemView.setOnClickListener(view -> notifyClickEvent(view));
             binding.alarmSetting.btnCollapse.setOnClickListener(view -> toggleSettingView(false));
             binding.btnExpand.setOnClickListener(view -> toggleSettingView(false));
-
             binding.alarmTime.setOnClickListener(view -> {
-                showTimePickerDialog(view);
-                    }
-            );
+                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                showTimePickerDialog(alarm);
+            });
         }
 
         private void toggleSettingView(boolean forceCollapsing) {
             Alarm alarm = mAlarmList.get(getAdapterPosition());
             if (forceCollapsing) alarm.selected = false;
             else alarm.selected ^= true;
-            binding.btnExpand.setVisibility(alarm.selected ? View.INVISIBLE : View.VISIBLE);
+            binding.daysContainer.setVisibility(alarm.selected ? View.GONE : View.VISIBLE);
             binding.setAlarm(alarm);
         }
 
-        public void showTimePickerDialog(View v) {
-            DialogFragment newFragment = new TimePickerFragment();
-            newFragment.show(getSupportFragmentManager(), "timePicker");
+        public void showTimePickerDialog(Alarm alarm) {
+            // Create a new instance of TimePickerDialog and return it
+            new TimePickerDialog(mContext, this, alarm.getHours(), alarm.getMinutes(), false).show();
         }
 
-
-
+        @Override
+        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+            Toast.makeText(mContext, "hour: " + i + ", minute: " + i1, Toast.LENGTH_SHORT).show();
+        }
     }
 }

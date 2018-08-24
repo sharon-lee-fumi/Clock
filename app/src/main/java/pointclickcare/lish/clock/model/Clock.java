@@ -1,57 +1,33 @@
 package pointclickcare.lish.clock.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class Clock {
-    private String time;
-    private String period;
-    private String date;
+    private Date dateTime;
 
     public Clock() {
-        this.time = this.getFormattedTime();
-        this.period = this.getFormattedPeriod();
-        this.date = this.getFormattedDate();
+        this.dateTime = new Date();
     }
 
-    public String getTime() {
-        return time;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public String getPeriod() {
-        return period;
+    public String getTimeStr() {
+        return new SimpleDateFormat("hh:mm", Locale.getDefault()).format(dateTime);
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
+    public String getAmPmStr() {
+        return new SimpleDateFormat("a", Locale.getDefault()).format(dateTime);
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getFormattedTime() {
-        Date currentDateTime = Calendar.getInstance().getTime();
-        return new SimpleDateFormat("hh:mm", Locale.getDefault()).format(currentDateTime);
-    }
-
-    public String getFormattedPeriod() {
-        Date currentDateTime = Calendar.getInstance().getTime();
-        return new SimpleDateFormat("a", Locale.getDefault()).format(currentDateTime);
-    }
-
-    public String getFormattedDate() {
-        Date currentDateTime = Calendar.getInstance().getTime();
-        return new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault()).format(currentDateTime);
+    public String getDateStr() {
+        return new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault()).format(dateTime);
     }
 }
