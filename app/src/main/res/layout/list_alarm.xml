@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -23,23 +24,25 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/alarmTime"
                 style="@style/AlarmTimeNumberStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.time}" />
+                android:text="@{alarm.time}"
+                tools:text="8:00"/>
 
             <TextView
-                android:id="@+id/period"
+                android:id="@+id/alarmPeriod"
                 style="@style/AlarmAmPmStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="@{alarm.period}" />
+                android:text="@{alarm.period}"
+                tools:text="AM"/>
 
             <Switch
                 android:id="@+id/status"
@@ -62,7 +65,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.days}" />
+                android:text="@{alarm.days}"
+                tools:text="Tomorrow"/>
 
             <ImageButton
                 android:id="@+id/btn_expand"
