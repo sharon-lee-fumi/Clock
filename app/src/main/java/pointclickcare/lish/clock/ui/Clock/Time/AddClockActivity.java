@@ -1,7 +1,10 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,11 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.ActivityAddClockBinding;
-import pointclickcare.lish.clock.databinding.ContentAddClockBinding;
+import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.model.ZoneList;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
@@ -26,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddClockActivity extends AppCompatActivity {
-    //ContentAddClockBinding binding;
+    public List<Time> savedZone = new ArrayList<>();
     ActivityAddClockBinding binding;
     ZoneListAdapter adapter;
     Callback<ZoneList> mZoneListCallback = new Callback<ZoneList>() {
@@ -51,19 +55,12 @@ public class AddClockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clock);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.add_clock_title);
         setSupportActionBar(toolbar);
-/*
-        View contentView = findViewById(R.id.content_add_clock);
-        binding = DataBindingUtil.bind(contentView);*/
 
         View contentView = findViewById(R.id.add_clock);
         binding = DataBindingUtil.bind(contentView);
 
         adapter = new ZoneListAdapter();
-/*        binding.listZone.setAdapter(adapter);
-        binding.listZone.setLayoutManager(new LinearLayoutManager(this));
-        binding.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));*/
 
         binding.contentAddClock.listZone.setAdapter(adapter);
         binding.contentAddClock.listZone.setLayoutManager(new LinearLayoutManager(this));
@@ -71,9 +68,22 @@ public class AddClockActivity extends AppCompatActivity {
 
         binding.backToClockButton.setOnClickListener(
                 viewBtn -> {
+                    savedZone = adapter.getSavedZone();
+
+                    String uri = "content://pointclickcare.lish.clock.ui.Clock.Time.ClockContentProvider/zones";
+                    Uri zones = Uri.parse(uri);
+                    ContentResolver cr = this.getContentResolver();
+
+                    for (int i = 0; i < savedZone.size(); i++) {
+                        ContentValues cv = new ContentValues();
+
+                        cv.put("ZONE_NAME", savedZone.get(i).getZoneName());
+                        cv.put("GMT_OFFSET", savedZone.get(i).getGmtOffset());
+
+                        cr.insert(zones, cv);
+                    }
 
                     Intent intent = new Intent(this, MainActivity.class);
-                    //intent.putExtra(Extra.DATA, "Data from Activity 1");
                     startActivity(intent);
                 }
         );
