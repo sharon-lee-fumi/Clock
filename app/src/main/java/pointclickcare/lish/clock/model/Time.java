@@ -15,6 +15,22 @@ public class Time {
         this.gmtOffset = gmtOffset;
     }
 
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
+
+    public long getGmtOffset() {
+        return gmtOffset;
+    }
+
+    public void setGmtOffset(long gmtOffset) {
+        this.gmtOffset = gmtOffset;
+    }
+
     public String getCountryName() {
         return zoneName;
     }

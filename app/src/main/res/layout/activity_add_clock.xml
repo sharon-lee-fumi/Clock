@@ -8,11 +8,7 @@
     android:background="@android:color/black"
     android:fitsSystemWindows="true"
     tools:context=".ui.Clock.Time.AddClockActivity"
-
-    android:id="@+id/add_clock"
-
-
-    >
+    android:id="@+id/add_clock">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -21,15 +17,6 @@
         android:background="@android:color/black"
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-<!--        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-
-
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
