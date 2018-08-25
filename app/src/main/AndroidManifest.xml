@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name"
+            android:label=""
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +32,11 @@
         <activity
             android:name=".ui.Clock.Time.AddClockActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <provider
-            android:name=".ui.Clock.Time.ClockContentProvider"
-            android:authorities="pointclickcare.lish.clock.ui.Clock.Time.ClockContentProvider"
+            android:name=".util.ClockContentProvider"
+            android:authorities="pointclickcare.lish.clock.util.ClockContentProvider"
             android:enabled="true"
             android:exported="true"
             android:permission="pointclickcare.lish.clock.PROVIDER_PERMISSION" />
