@@ -101,7 +101,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-            Toast.makeText(mContext, "hour: " + hour + ", minute: " + minute, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
         }
     }
 }
