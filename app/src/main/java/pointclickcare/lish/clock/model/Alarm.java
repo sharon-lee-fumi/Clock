@@ -1,14 +1,22 @@
 package pointclickcare.lish.clock.model;
 
+import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class Alarm {
+import pointclickcare.lish.clock.ClockApplication;
+import pointclickcare.lish.clock.R;
+
+public class Alarm extends BaseObservable {
     public final ObservableBoolean status = new ObservableBoolean();
+    public final ObservableBoolean repeat = new ObservableBoolean();
+    public final List<ObservableBoolean> days = new ArrayList<>();
     public boolean selected;
     public AlarmData alarmData;
     private Date time;
@@ -18,6 +26,22 @@ public class Alarm {
         this.time = new Date();
         this.status.set(false);
         this.selected = false;
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
+        }
+    }
+
+    public Alarm(Date time, int status) {
+        this.time = time;
+        if (status == 1)
+        {
+            this.status.set(true);
+        }
+        else
+        {
+            this.status.set(false);
+        }
+
     }
 
     public Date getTime() {
@@ -34,6 +58,25 @@ public class Alarm {
 
     public String getAmPmStr() {
         return new SimpleDateFormat("a", Locale.getDefault()).format(time);
+    }
+
+    public String getDaysStr() {
+        String[] daysString = ClockApplication.sInstance.getResources().getStringArray(R.array.daysString);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < days.size(); i++) {
+            if (days.get(i).get()) {
+                sb.append(daysString[i] + " ");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public List<ObservableBoolean> getDays() {
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
+        }
+        return days;
     }
 
     public AlarmData getAlarmData() {

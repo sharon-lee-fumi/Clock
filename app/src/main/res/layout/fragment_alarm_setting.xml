@@ -15,6 +15,10 @@
             name="alarmData"
             type="pointclickcare.lish.clock.model.AlarmData" />
 
+        <variable
+            name="alarm"
+            type="pointclickcare.lish.clock.model.Alarm" />
+
     </data>
 
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +37,7 @@
             style="@style/AlarmDaysStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@={alarmData.repeat}"
+            android:checked="@={alarm.repeat}"
             android:text="@string/alarm_setting_repeat" />
 
         <LinearLayout
@@ -42,7 +46,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="@{alarmData.repeat ? View.VISIBLE : View.GONE}">
+            android:visibility="@{alarm.repeat ? View.VISIBLE : View.GONE}">
 
             <include
                 android:id="@+id/alarm_dayBtn_sun"
