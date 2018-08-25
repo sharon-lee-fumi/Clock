@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +49,15 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
+        View view = binding.getRoot();
+
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri);
         ContentResolver cr = getActivity().getContentResolver();
@@ -55,25 +66,19 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         if (cursor != null) {
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 // The Cursor is now set to the right position
-/*                Alarm alarm = new Alarm(cursor.getString(cursor.getColumnIndex("ALARM_TIME")),
-                        cursor.getString(cursor.getColumnIndex("ALARM_TIME")),
-                        cursor.getString(cursor.getColumnIndex("ALARM_TIME")),
-                        cursor.getString(cursor.getColumnIndex("ALARM_TIME")),
-                        cursor.getString(cursor.getColumnIndex("ALARM_TIME")),
-                        cursor.getLong(cursor.getColumnIndex("GMT_OFFSET")));
-                alarmList.add(alarm);*/
+                Alarm alarm = null;
+                try {
+                    alarm = new Alarm(new SimpleDateFormat("hh:mm").parse(cursor.getString(cursor.getColumnIndex("ALARM_TIME"))),
+                            cursor.getInt(cursor.getColumnIndex("ALARM_STATUS")));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                AlarmData alarmData = new AlarmData();
+                alarm.setAlarmData(alarmData);
+
+                alarmList.add(alarm);
             }
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        alarmList = generateAlarmData(6);
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
-        View view = binding.getRoot();
 
         adapter = new AlarmListAdapter(getContext());
         adapter.setSource(alarmList);
@@ -82,27 +87,6 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         binding.listAlarm.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.listAlarm.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
-        String message = "Tue";
-
-        Fragment fragment = AlarmSettingFragment.newInstance(message);
-
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.commit();
         return view;
-    }
-
-    private List<Alarm> generateAlarmData(int count) {
-        List<Alarm> alarmList = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            Alarm alarm = new Alarm();
-            AlarmData alarmData = new AlarmData();
-            alarm.setAlarmData(alarmData);
-
-            alarm.status.set(true);
-            alarm.setTime(new Date(new Date().getTime() + (long) (Math.random() * 1000 * 23 * 3600)));
-            alarmList.add(alarm);
-        }
-        return alarmList;
     }
 }
