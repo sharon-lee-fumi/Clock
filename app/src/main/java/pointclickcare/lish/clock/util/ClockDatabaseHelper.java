@@ -17,7 +17,6 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
     static final String TABLE_ALARM = "ALARMS";
     static final String ALARM_ID = "_ALARM_ID";
     static final String ALARM_TIME = "ALARM_TIME";
-    static final String ALARM_AMPM = "ALARM_AMPM";
     static final String ALARM_DAYS = "ALARM_DAYS";
     static final String ALARM_STATUS = "ALARM_STATUS";
 
@@ -29,7 +28,6 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ALARMS = "CREATE TABLE " + TABLE_ALARM + " (" +
             ALARM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             ALARM_TIME + " TEXT," +
-            ALARM_AMPM + " TEXT," +
             ALARM_DAYS + " TEXT," +
             ALARM_STATUS + " INTEGER);";
 
