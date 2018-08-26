@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -95,6 +96,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         cv.put("ALARM_STATUS", alarm.status.get());
 
         cr.insert(alarms, cv);
+        Toast.makeText(getContext(), "Alarm " + alarm.getTimeStr() + " is set", Toast.LENGTH_SHORT).show();
     }
 
     private void updateList(List<Alarm> alarmList) {

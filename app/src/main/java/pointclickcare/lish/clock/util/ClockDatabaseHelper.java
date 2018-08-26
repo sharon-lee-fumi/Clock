@@ -59,8 +59,8 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 1) {
             db.execSQL(SQL_CREATE_ZONES);
             db.execSQL(SQL_CREATE_ALARMS);
-            insertAlarm(db, "9:00", "0 1 0 1 0 1 0", 0);
-            insertAlarm(db, "15:00", "1 0 0 0 1 0 0", 1);
+            insertAlarm(db, "8:00", "0 1 1 1 1 1 0", 1);
+            insertAlarm(db, "9:00", "1 0 0 0 0 0 1", 0);
         }
     }
 
