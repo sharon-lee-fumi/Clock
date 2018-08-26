@@ -166,7 +166,7 @@ public class ClockContentProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;
             case PROVIDER_ALARM_ID:
-                id = uri.getPathSegments().get(3);
+                id = uri.getPathSegments().get(1);
                 selection = ClockDatabaseHelper.ALARM_ID + "=" + id
                         + (TextUtils.isEmpty(selection) ? "" : " AND (" + selection + ")");
                 updateCount = db.update(ClockDatabaseHelper.TABLE_ALARM, values, selection, selectionArgs);

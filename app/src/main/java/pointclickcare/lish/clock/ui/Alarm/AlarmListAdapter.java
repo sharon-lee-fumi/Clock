@@ -1,9 +1,13 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
     Context mContext;
     List<Alarm> mAlarmList = new ArrayList<>();
     private List<View.OnClickListener> observers = new ArrayList<>();
+    int alarmPosition;
 
     public AlarmListAdapter(Context context) {
         mContext = context;
@@ -97,10 +102,21 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         public void showTimePickerDialog(Alarm alarm) {
             // Create a new instance of TimePickerDialog and return it
             new TimePickerDialog(mContext, this, alarm.getHours(), alarm.getMinutes(), false).show();
+            alarmPosition = mAlarmList.indexOf(alarm);
         }
 
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+            int id = alarmPosition + 1;
+
+            String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+            Uri alarms = Uri.parse(uri + "/" + id);
+            ContentResolver cr = mContext.getContentResolver();
+
+            ContentValues cv = new ContentValues();
+            cv.put("ALARM_TIME", hour + ":" + minute);
+            cr.update(alarms, cv, null, null);
+
             Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
         }
     }

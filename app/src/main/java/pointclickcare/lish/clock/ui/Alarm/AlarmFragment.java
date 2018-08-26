@@ -2,6 +2,7 @@ package pointclickcare.lish.clock.ui.Alarm;
 
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -46,6 +47,18 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
         View view = binding.getRoot();
 
+        alarmList = generateAlarmList();
+        adapter = new AlarmListAdapter(getContext());
+        adapter.setSource(alarmList);
+
+        binding.listAlarm.setAdapter(adapter);
+        binding.listAlarm.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.listAlarm.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        return view;
+    }
+
+    private List<Alarm> generateAlarmList() {
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri);
         ContentResolver cr = getActivity().getContentResolver();
@@ -65,14 +78,20 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
                 alarmList.add(alarm);
             }
         }
+        return alarmList;
+    }
 
-        adapter = new AlarmListAdapter(getContext());
-        adapter.setSource(alarmList);
+    public void insertAlarm() {
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri);
+        ContentResolver cr = getActivity().getContentResolver();
+        ContentValues cv = new ContentValues();
 
-        binding.listAlarm.setAdapter(adapter);
-        binding.listAlarm.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.listAlarm.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        Alarm alarm = new Alarm();
+        cv.put("ALARM_TIME", alarm.getTimeStr());
+        cv.put("ALARM_DAYS", alarm.getDaysStr());
+        cv.put("ALARM_STATUS", alarm.status.get());
 
-        return view;
+        cr.insert(alarms, cv);
     }
 }

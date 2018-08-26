@@ -23,7 +23,7 @@ public class Alarm extends BaseObservable {
 
     public Alarm() {
         this.time = new Date();
-        this.status.set(false);
+        this.status.set(true);
         this.selected = false;
         for (int i = 0; i < 7; i++) {
             days.add(new ObservableBoolean());
@@ -31,6 +31,7 @@ public class Alarm extends BaseObservable {
     }
 
     public Alarm(Date time, String daysString, int status) {
+        boolean repeatFlag = false;
         this.time = time;
 
         for (int i = 0; i < 7; i++) {
@@ -41,6 +42,7 @@ public class Alarm extends BaseObservable {
         for (int i = 0; i < selectedDays.length; i++) {
             if (selectedDays[i].equals("1")) {
                 days.get(i).set(true);
+                repeatFlag = true;
             } else {
                 days.get(i).set(false);
             }
@@ -52,6 +54,10 @@ public class Alarm extends BaseObservable {
             this.status.set(false);
         }
 
+        if (repeatFlag)
+        {
+            this.repeat.set(true);
+        }
     }
 
     public Date getTime() {

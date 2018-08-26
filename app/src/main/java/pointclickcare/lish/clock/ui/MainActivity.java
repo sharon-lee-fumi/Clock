@@ -107,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
             int tabPosition = tabLayout.getSelectedTabPosition();
 
             switch (tabPosition) {
+                case 0:
+                    fragment = mSectionsPagerAdapter.getFragmentAtPosition(0);
+                    if (fragment instanceof AlarmFragment) {
+                        AlarmFragment alarmFragment = (AlarmFragment) fragment;
+                        alarmFragment.insertAlarm();
+                    }
+                    break;
                 case 1:
                     AddClock();
                     break;
