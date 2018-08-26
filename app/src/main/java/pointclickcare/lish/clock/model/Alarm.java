@@ -18,11 +18,10 @@ public class Alarm extends BaseObservable {
     public final ObservableBoolean repeat = new ObservableBoolean();
     public final List<ObservableBoolean> days = new ArrayList<>();
     public boolean selected;
-    public AlarmData alarmData;
+    public String strSeparator = " ";
     private Date time;
 
     public Alarm() {
-        this.alarmData = this.getAlarmData();
         this.time = new Date();
         this.status.set(false);
         this.selected = false;
@@ -31,14 +30,25 @@ public class Alarm extends BaseObservable {
         }
     }
 
-    public Alarm(Date time, int status) {
+    public Alarm(Date time, String daysString, int status) {
         this.time = time;
-        if (status == 1)
-        {
-            this.status.set(true);
+
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
         }
-        else
-        {
+        String[] selectedDays = getDaysArray(daysString);
+
+        for (int i = 0; i < selectedDays.length; i++) {
+            if (selectedDays[i].equals("1")) {
+                days.get(i).set(true);
+            } else {
+                days.get(i).set(false);
+            }
+        }
+
+        if (status == 1) {
+            this.status.set(true);
+        } else {
             this.status.set(false);
         }
 
@@ -65,11 +75,45 @@ public class Alarm extends BaseObservable {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < days.size(); i++) {
             if (days.get(i).get()) {
-                sb.append(daysString[i] + " ");
+                sb.append(daysString[i] + strSeparator);
             }
         }
-
         return sb.toString();
+    }
+
+    public String getDaysStr(String[] daysArray) {
+        String str = "";
+        for (int i = 0; i < daysArray.length; i++) {
+            str = str + daysArray[i];
+            // Do not append comma at the end of last element
+            if (i < daysArray.length - 1) {
+                str = str + strSeparator;
+            }
+        }
+        return str;
+    }
+
+    public String[] getDaysArray(String daysString) {
+        String[] daysArray = daysString.split(strSeparator);
+        return daysArray;
+    }
+
+
+    public String convertArrayToString(String[] array) {
+        String str = "";
+        for (int i = 0; i < array.length; i++) {
+            str = str + array[i];
+            // Do not append comma at the end of last element
+            if (i < array.length - 1) {
+                str = str + strSeparator;
+            }
+        }
+        return str;
+    }
+
+    public String[] convertStringToArray(String str) {
+        String[] arr = str.split(strSeparator);
+        return arr;
     }
 
     public List<ObservableBoolean> getDays() {
@@ -77,14 +121,6 @@ public class Alarm extends BaseObservable {
             days.add(new ObservableBoolean());
         }
         return days;
-    }
-
-    public AlarmData getAlarmData() {
-        return alarmData;
-    }
-
-    public void setAlarmData(AlarmData alarmData) {
-        this.alarmData = alarmData;
     }
 
     public int getHours() {

@@ -36,6 +36,15 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    private static void insertAlarm(SQLiteDatabase db, String time, String days,
+                                    int status) {
+        ContentValues values = new ContentValues();
+        values.put("ALARM_TIME", time);
+        values.put("ALARM_DAYS", days);
+        values.put("ALARM_STATUS", status);
+        db.insert("ALARMS", null, values);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         updateMyDatabase(db, 0, DB_VERSION);
@@ -50,19 +59,9 @@ public class ClockDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 1) {
             db.execSQL(SQL_CREATE_ZONES);
             db.execSQL(SQL_CREATE_ALARMS);
-            insertAlarm(db, "9:00", "SAT MON", 0);
-            insertAlarm(db, "15:00", "SUN TUE", 1);
+            insertAlarm(db, "9:00", "0 1 0 1 0 1 0", 0);
+            insertAlarm(db, "15:00", "1 0 0 0 1 0 0", 1);
         }
-    }
-
-    private static void insertAlarm(SQLiteDatabase db, String time, String days,
-                                  int status)
-    {
-        ContentValues values = new ContentValues();
-        values.put("ALARM_TIME", time);
-        values.put("ALARM_DAYS", days);
-        values.put("ALARM_STATUS", status);
-        db.insert("ALARMS", null, values);
     }
 
 }

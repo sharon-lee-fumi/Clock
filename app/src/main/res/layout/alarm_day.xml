@@ -10,10 +10,6 @@
             type="String" />
 
         <variable
-            name="alarmData"
-            type="pointclickcare.lish.clock.model.AlarmData" />
-
-        <variable
             name="alarm"
             type="pointclickcare.lish.clock.model.Alarm" />
 
@@ -33,7 +29,7 @@
             android:id="@+id/cb_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@={alarmData.days.get(day)}"
+            android:checked="@={alarm.days.get(day)}"
             android:visibility="gone" />
 
         <ImageView
@@ -41,7 +37,7 @@
             android:layout_height="@dimen/day_circle_dimen"
             android:layout_centerInParent="true"
             android:src="@drawable/oval_selected"
-            android:visibility="@{alarmData.days.get(day) ? View.VISIBLE : View.INVISIBLE}" />
+            android:visibility="@{alarm.days.get(day) ? View.VISIBLE : View.INVISIBLE}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,6 +45,6 @@
             android:layout_centerInParent="true"
             android:text="@{dayStr}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@{alarmData.days.get(day) ? @android:color/black : @android:color/white}" />
+            android:textColor="@{alarm.days.get(day) ? @android:color/black : @android:color/white}" />
     </RelativeLayout>
 </layout>
