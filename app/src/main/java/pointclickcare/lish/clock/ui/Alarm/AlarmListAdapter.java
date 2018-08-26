@@ -70,9 +70,9 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             for (AlarmDayBinding alarmDayBinding : bindingsForAlarmDayButton) {
                 alarmDayBinding.alarmDaysContainer.setOnClickListener(view -> {
-                    Alarm alarm = mAlarmList.get(getAdapterPosition());
+                    //Alarm alarm = mAlarmList.get(getAdapterPosition());
                     alarmDayBinding.cbSelect.setChecked(!alarmDayBinding.cbSelect.isChecked());
-                    alarmDayBinding.setAlarmData(alarm.alarmData);
+                    //alarmDayBinding.setAlarmData(alarm.alarmData);
                 });
             }
 
