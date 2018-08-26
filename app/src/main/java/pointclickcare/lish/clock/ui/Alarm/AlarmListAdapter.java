@@ -83,11 +83,20 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             observers.add(view -> toggleSettingView(view != itemView));
             itemView.setOnClickListener(view -> notifyClickEvent(view));
-            binding.alarmSetting.btnCollapse.setOnClickListener(view -> toggleSettingView(false));
+            binding.alarmSetting.btnCollapse.setOnClickListener(view -> {
+                toggleSettingView(false);
+                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                updateDaysSetting(alarm);
+            });
             binding.btnExpand.setOnClickListener(view -> toggleSettingView(false));
             binding.alarmTime.setOnClickListener(view -> {
                 Alarm alarm = mAlarmList.get(getAdapterPosition());
                 showTimePickerDialog(alarm);
+            });
+
+            binding.alarmSetting.btnDelete.setOnClickListener(view -> {
+                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                deleteAlarm(alarm);
             });
         }
 
@@ -119,5 +128,30 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void deleteAlarm(Alarm alarm) {
+        alarmPosition = mAlarmList.indexOf(alarm);
+        int id = alarmPosition + 1;
+
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri + "/" + id);
+        ContentResolver cr = mContext.getContentResolver();
+        cr.delete(alarms, null, null);
+
+        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void updateDaysSetting(Alarm alarm) {
+        alarmPosition = mAlarmList.indexOf(alarm);
+        int id = alarmPosition + 1;
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri + "/" + id);
+        ContentResolver cr = mContext.getContentResolver();
+
+        ContentValues cv = new ContentValues();
+        cv.put("ALARM_DAYS", alarm.getDaysBool(alarm.days));
+        cr.update(alarms, cv, null, null);
     }
 }

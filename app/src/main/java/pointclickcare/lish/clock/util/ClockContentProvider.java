@@ -132,7 +132,7 @@ public class ClockContentProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 break;
             case PROVIDER_ALARM_ID:
-                id = uri.getPathSegments().get(3);
+                id = uri.getPathSegments().get(1);
                 selection = ClockDatabaseHelper.ALARM_ID + "=" + id
                         + (TextUtils.isEmpty(selection) ? "" : " AND (" + selection + ")");
                 deleteCount = db.delete(ClockDatabaseHelper.TABLE_ALARM, selection, selectionArgs);

@@ -54,8 +54,7 @@ public class Alarm extends BaseObservable {
             this.status.set(false);
         }
 
-        if (repeatFlag)
-        {
+        if (repeatFlag) {
             this.repeat.set(true);
         }
     }
@@ -87,16 +86,19 @@ public class Alarm extends BaseObservable {
         return sb.toString();
     }
 
-    public String getDaysStr(String[] daysArray) {
-        String str = "";
-        for (int i = 0; i < daysArray.length; i++) {
-            str = str + daysArray[i];
-            // Do not append comma at the end of last element
-            if (i < daysArray.length - 1) {
-                str = str + strSeparator;
+    public String getDaysBool(List<ObservableBoolean> days) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 7; i++) {
+            if (days.get(i).get()) {
+                sb.append("1");
+            } else {
+                sb.append("0");
+            }
+            if (i < days.size() - 1) {
+                sb.append(strSeparator);
             }
         }
-        return str;
+        return sb.toString();
     }
 
     public String[] getDaysArray(String daysString) {
