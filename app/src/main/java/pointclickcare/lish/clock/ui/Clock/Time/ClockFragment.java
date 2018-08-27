@@ -44,6 +44,8 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         super.onCreate(savedInstanceState);
 
         getTimeList();
+/*        adapter = new TimeListAdapter();
+        adapter.setSource(getTimeList());*/
     }
 
     @Override
