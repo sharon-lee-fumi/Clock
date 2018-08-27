@@ -1,8 +1,11 @@
 package pointclickcare.lish.clock.ui.Alarm;
 
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import pointclickcare.lish.clock.model.Alarm;
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
     Context mContext;
     List<Alarm> mAlarmList = new ArrayList<>();
+    int alarmPosition;
     private List<View.OnClickListener> observers = new ArrayList<>();
 
     public AlarmListAdapter(Context context) {
@@ -55,6 +59,53 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         }
     }
 
+    private void updateAlarmStatus(Alarm alarm, boolean status) {
+        int i;
+        if (status) {
+            i = 1;
+        } else {
+            i = 0;
+        }
+        alarmPosition = mAlarmList.indexOf(alarm);
+        int id = alarmPosition + 1;
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri + "/" + id);
+        ContentResolver cr = mContext.getContentResolver();
+
+        ContentValues cv = new ContentValues();
+        cv.put("ALARM_STATUS", i);
+        cr.update(alarms, cv, null, null);
+
+        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is updated", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteAlarm(Alarm alarm) {
+        alarmPosition = mAlarmList.indexOf(alarm);
+        int id = alarmPosition + 1;
+
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri + "/" + id);
+        ContentResolver cr = mContext.getContentResolver();
+        cr.delete(alarms, null, null);
+
+        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void updateDaysSetting(Alarm alarm) {
+        alarmPosition = mAlarmList.indexOf(alarm);
+        int id = alarmPosition + 1;
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+        Uri alarms = Uri.parse(uri + "/" + id);
+        ContentResolver cr = mContext.getContentResolver();
+
+        ContentValues cv = new ContentValues();
+        cv.put("ALARM_DAYS", alarm.getDaysBool(alarm.days));
+        cr.update(alarms, cv, null, null);
+
+        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " days is updated", Toast.LENGTH_SHORT).show();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder
             implements TimePickerDialog.OnTimeSetListener {
         ListAlarmBinding binding;
@@ -70,19 +121,44 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             for (AlarmDayBinding alarmDayBinding : bindingsForAlarmDayButton) {
                 alarmDayBinding.alarmDaysContainer.setOnClickListener(view -> {
-                    Alarm alarm = mAlarmList.get(getAdapterPosition());
+                    //Alarm alarm = mAlarmList.get(getAdapterPosition());
                     alarmDayBinding.cbSelect.setChecked(!alarmDayBinding.cbSelect.isChecked());
-                    alarmDayBinding.setAlarmData(alarm.alarmData);
+                    //alarmDayBinding.setAlarmData(alarm.alarmData);
                 });
             }
 
             observers.add(view -> toggleSettingView(view != itemView));
             itemView.setOnClickListener(view -> notifyClickEvent(view));
-            binding.alarmSetting.btnCollapse.setOnClickListener(view -> toggleSettingView(false));
+            binding.alarmSetting.btnCollapse.setOnClickListener(view -> {
+                toggleSettingView(false);
+                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                updateDaysSetting(alarm);
+            });
             binding.btnExpand.setOnClickListener(view -> toggleSettingView(false));
             binding.alarmTime.setOnClickListener(view -> {
                 Alarm alarm = mAlarmList.get(getAdapterPosition());
                 showTimePickerDialog(alarm);
+            });
+
+/*
+            binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Alarm alarm = mAlarmList.get(getAdapterPosition());
+                    if (binding.status.isChecked())
+                    {
+                        updateAlarmStatus(alarm, true);
+                    }
+                    else
+                    {
+                        updateAlarmStatus(alarm, false);
+                    }
+                }
+            });
+*/
+
+            binding.alarmSetting.btnDelete.setOnClickListener(view -> {
+                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                deleteAlarm(alarm);
             });
         }
 
@@ -97,11 +173,22 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         public void showTimePickerDialog(Alarm alarm) {
             // Create a new instance of TimePickerDialog and return it
             new TimePickerDialog(mContext, this, alarm.getHours(), alarm.getMinutes(), false).show();
+            alarmPosition = mAlarmList.indexOf(alarm);
         }
 
         @Override
-        public void onTimeSet(TimePicker timePicker, int i, int i1) {
-            Toast.makeText(mContext, "hour: " + i + ", minute: " + i1, Toast.LENGTH_SHORT).show();
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+            int id = alarmPosition + 1;
+
+            String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
+            Uri alarms = Uri.parse(uri + "/" + id);
+            ContentResolver cr = mContext.getContentResolver();
+
+            ContentValues cv = new ContentValues();
+            cv.put("ALARM_TIME", hour + ":" + minute);
+            cr.update(alarms, cv, null, null);
+
+            Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
         }
     }
 }

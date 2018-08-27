@@ -1,23 +1,62 @@
 package pointclickcare.lish.clock.model;
 
+import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class Alarm {
+import pointclickcare.lish.clock.ClockApplication;
+import pointclickcare.lish.clock.R;
+
+public class Alarm extends BaseObservable {
     public final ObservableBoolean status = new ObservableBoolean();
+    public final ObservableBoolean repeat = new ObservableBoolean();
+    public final List<ObservableBoolean> days = new ArrayList<>();
     public boolean selected;
-    public AlarmData alarmData;
+    public String strSeparator = " ";
     private Date time;
 
     public Alarm() {
-        this.alarmData = this.getAlarmData();
         this.time = new Date();
-        this.status.set(false);
+        this.status.set(true);
         this.selected = false;
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
+        }
+    }
+
+    public Alarm(Date time, String daysString, int status) {
+        boolean repeatFlag = false;
+        this.time = time;
+
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
+        }
+        String[] selectedDays = getDaysArray(daysString);
+
+        for (int i = 0; i < selectedDays.length; i++) {
+            if (selectedDays[i].equals("1")) {
+                days.get(i).set(true);
+                repeatFlag = true;
+            } else {
+                days.get(i).set(false);
+            }
+        }
+
+        if (status == 1) {
+            this.status.set(true);
+        } else {
+            this.status.set(false);
+        }
+
+        if (repeatFlag) {
+            this.repeat.set(true);
+        }
     }
 
     public Date getTime() {
@@ -36,12 +75,42 @@ public class Alarm {
         return new SimpleDateFormat("a", Locale.getDefault()).format(time);
     }
 
-    public AlarmData getAlarmData() {
-        return alarmData;
+    public String getDaysStr() {
+        String[] daysString = ClockApplication.sInstance.getResources().getStringArray(R.array.daysString);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < days.size(); i++) {
+            if (days.get(i).get()) {
+                sb.append(daysString[i] + strSeparator);
+            }
+        }
+        return sb.toString();
     }
 
-    public void setAlarmData(AlarmData alarmData) {
-        this.alarmData = alarmData;
+    public String getDaysBool(List<ObservableBoolean> days) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 7; i++) {
+            if (days.get(i).get()) {
+                sb.append("1");
+            } else {
+                sb.append("0");
+            }
+            if (i < days.size() - 1) {
+                sb.append(strSeparator);
+            }
+        }
+        return sb.toString();
+    }
+
+    public String[] getDaysArray(String daysString) {
+        String[] daysArray = daysString.split(strSeparator);
+        return daysArray;
+    }
+
+    public List<ObservableBoolean> getDays() {
+        for (int i = 0; i < 7; i++) {
+            days.add(new ObservableBoolean());
+        }
+        return days;
     }
 
     public int getHours() {

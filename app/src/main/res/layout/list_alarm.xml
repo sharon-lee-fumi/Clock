@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:checked="@{alarm.status}" />
+                android:checked="@={alarm.status}" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +66,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:text="@{alarm.alarmData.daysStr}"
+                android:text="@{alarm.daysStr}"
                 tools:text="Tomorrow"/>
 
             <ImageButton
@@ -83,7 +83,7 @@
         <include
             android:id="@+id/alarm_setting"
             layout="@layout/fragment_alarm_setting"
-            bind:alarmData="@{alarm.alarmData}"
+            bind:alarm="@{alarm}"
             bind:showDaysSetting="@{alarm.selected}" />
     </LinearLayout>
 

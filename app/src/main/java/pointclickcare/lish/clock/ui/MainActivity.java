@@ -15,7 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.Serializable;
+import java.util.List;
+
 import pointclickcare.lish.clock.R;
+import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Timer;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
 import pointclickcare.lish.clock.ui.Clock.Time.AddClockActivity;
@@ -23,11 +27,13 @@ import pointclickcare.lish.clock.ui.Clock.Time.ClockFragment;
 import pointclickcare.lish.clock.ui.Timer.RunTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.SetTimerFragment;
 import pointclickcare.lish.clock.ui.Timer.TimerFragment;
+import pointclickcare.lish.clock.util.Extras;
 import pointclickcare.lish.clock.util.UiUtil;
 
 public class MainActivity extends AppCompatActivity {
 
     StopwatchFragment stopwatchFragment = null;
+    List<Time> timeList;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -107,8 +113,20 @@ public class MainActivity extends AppCompatActivity {
             int tabPosition = tabLayout.getSelectedTabPosition();
 
             switch (tabPosition) {
+                case 0:
+                    fragment = mSectionsPagerAdapter.getFragmentAtPosition(0);
+                    if (fragment instanceof AlarmFragment) {
+                        AlarmFragment alarmFragment = (AlarmFragment) fragment;
+                        alarmFragment.insertAlarm();
+                    }
+                    break;
                 case 1:
-                    AddClock();
+                    fragment = mSectionsPagerAdapter.getFragmentAtPosition(1);
+                    if (fragment instanceof ClockFragment) {
+                        ClockFragment clockFragment = (ClockFragment) fragment;
+                        timeList = clockFragment.getTimeList();
+                    }
+                    AddClock(timeList);
                     break;
                 case 2:
                     fragment = mSectionsPagerAdapter.getFragmentAtPosition(2);
@@ -121,6 +139,10 @@ public class MainActivity extends AppCompatActivity {
 
                             Fragment runTimer = RunTimerFragment.newInstance(newTimer);
                             UiUtil.switchFragment(getSupportFragmentManager(), R.id.timerPlaceholder, runTimer);
+                        }
+                        if (fragmentPlaceholder != null && fragmentPlaceholder instanceof RunTimerFragment) {
+                            RunTimerFragment runTimerFragment = (RunTimerFragment) fragmentPlaceholder;
+                            runTimerFragment.runTimer();
                         }
                     }
                     break;
@@ -162,8 +184,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void AddClock() {
+    public void AddClock(List<Time> timeList) {
         Intent intent = new Intent(this, AddClockActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Extras.ALARM, (Serializable) timeList);
+        intent.putExtras(bundle);
+
         //intent.putExtra(Extra.DATA, "Data from Clock");
         startActivity(intent);
     }

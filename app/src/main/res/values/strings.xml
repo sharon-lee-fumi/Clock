@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Sharon\'s Clock</string>
     <string name="tab_text_1">alarm</string>
     <string name="tab_text_2">clock</string>
     <string name="tab_text_3">timer</string>
