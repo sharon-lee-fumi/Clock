@@ -64,15 +64,13 @@ public class AddClockActivity extends AppCompatActivity {
         Intent getIntent = this.getIntent();
         Bundle bundle = getIntent.getExtras();
 
-        List<Time> getZone = (List<Time>)bundle.getSerializable(Extras.ALARM);
+        List<Time> getZone = (List<Time>) bundle.getSerializable(Extras.ALARM);
 
         adapter = new ZoneListAdapter(getZone);
 
         binding.contentAddClock.listZone.setAdapter(adapter);
         binding.contentAddClock.listZone.setLayoutManager(new LinearLayoutManager(this));
         binding.contentAddClock.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-
 
         binding.backToClockButton.setOnClickListener(
                 viewBtn -> {
