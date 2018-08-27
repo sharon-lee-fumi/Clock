@@ -77,9 +77,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
         ContentValues cv = new ContentValues();
         cv.put("ALARM_STATUS", i);
-        cr.update(alarms, cv, null, null);
-
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is updated", Toast.LENGTH_SHORT).show();
+        int returns = cr.update(alarms, cv, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is updated", Toast.LENGTH_SHORT).show();
+            updateAlarmList();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void deleteAlarm(Alarm alarm) {
@@ -89,10 +93,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri + "/" + id);
         ContentResolver cr = mContext.getContentResolver();
-        cr.delete(alarms, null, null);
-
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
-        updateAlarmList();
+        int returns = cr.delete(alarms, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
+            updateAlarmList();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateDaysSetting(Alarm alarm) {
@@ -104,9 +111,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
         ContentValues cv = new ContentValues();
         cv.put("ALARM_DAYS", alarm.getDaysBool(alarm.days));
-        cr.update(alarms, cv, null, null);
+        int returns = cr.update(alarms, cv, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " days is updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " days is updated", Toast.LENGTH_SHORT).show();
     }
 
     private void updateAlarmList() {
@@ -188,10 +199,14 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             ContentValues cv = new ContentValues();
             cv.put("ALARM_TIME", hour + ":" + minute);
-            cr.update(alarms, cv, null, null);
+            int returns = cr.update(alarms, cv, null, null);
 
-            Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
-            updateAlarmList();
+            if (returns == 1) {
+                Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
+                updateAlarmList();
+            } else {
+                Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
