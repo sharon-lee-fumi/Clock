@@ -1,5 +1,6 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,9 +17,13 @@ import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
 
 public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHolder> {
-    public List<Time> savedZone = new ArrayList<>();
+    public List<Time> savedZone;
     ListZoneBinding binding;
     private List<Zone> listZone = new ArrayList<>();
+
+    public ZoneListAdapter(List<Time> getZone) {
+        savedZone = getZone;
+    }
 
     public void setSource(List<Zone> list) {
         listZone = list;
@@ -44,6 +49,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
     }
 
     public List<Time> getSavedZone() {
+        //savedZone = null;
         for (int i = 0; i < listZone.size(); i++) {
             if (listZone.get(i).selected.get()) {
                 Time time = new Time(listZone.get(i).getZoneName(), listZone.get(i).getGmtOffset());
@@ -61,6 +67,14 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
             super(itemView);
             this.binding = binding;
 
+            for (int i = 0; i < savedZone.size(); i++) {
+                for (int j = 0; j < listZone.size(); j++) {
+                    if (savedZone.get(i).getZoneName().equals(listZone.get(j).getZoneName())) {
+                        listZone.get(j).selected.set(true);
+                    }
+                }
+            }
+            
             itemView.setOnClickListener((view) ->
                     new TimeZoneDBClient().getZoneTime(zone.getZoneName())
             );
