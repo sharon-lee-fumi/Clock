@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -140,21 +141,22 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                 showTimePickerDialog(alarm);
             });
 
-/*
+
+
+
+
             binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Alarm alarm = mAlarmList.get(getAdapterPosition());
-                    if (binding.status.isChecked())
-                    {
+                    if (binding.status.isChecked()) {
                         updateAlarmStatus(alarm, true);
-                    }
-                    else
-                    {
+                    } else {
                         updateAlarmStatus(alarm, false);
                     }
                 }
             });
-*/
+
+
 
             binding.alarmSetting.btnDelete.setOnClickListener(view -> {
                 Alarm alarm = mAlarmList.get(getAdapterPosition());
