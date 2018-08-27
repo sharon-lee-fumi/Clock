@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import pointclickcare.lish.clock.R;
-import pointclickcare.lish.clock.model.Clock;
 import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.model.Timer;
 import pointclickcare.lish.clock.ui.Alarm.AlarmFragment;
@@ -141,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
                             Fragment runTimer = RunTimerFragment.newInstance(newTimer);
                             UiUtil.switchFragment(getSupportFragmentManager(), R.id.timerPlaceholder, runTimer);
                         }
+                        if (fragmentPlaceholder != null && fragmentPlaceholder instanceof RunTimerFragment) {
+                            RunTimerFragment runTimerFragment = (RunTimerFragment) fragmentPlaceholder;
+                            runTimerFragment.runTimer();
+                        }
                     }
                     break;
                 case 3:
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddClockActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Extras.ALARM, (Serializable)timeList);
+        bundle.putSerializable(Extras.ALARM, (Serializable) timeList);
         intent.putExtras(bundle);
 
         //intent.putExtra(Extra.DATA, "Data from Clock");
