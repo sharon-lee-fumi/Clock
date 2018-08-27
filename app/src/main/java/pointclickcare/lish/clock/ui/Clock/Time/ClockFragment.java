@@ -43,18 +43,7 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
-        Uri zones = Uri.parse(uri);
-        ContentResolver cr = getActivity().getContentResolver();
-        Cursor cursor = cr.query(zones, null, null, null, "ZONE_NAME");
-
-        if (cursor != null) {
-            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                // The Cursor is now set to the right position
-                Time t = new Time(cursor.getString(cursor.getColumnIndex("ZONE_NAME")), cursor.getLong(cursor.getColumnIndex("GMT_OFFSET")));
-                timeList.add(t);
-            }
-        }
+        getTimeList();
     }
 
     @Override
@@ -74,4 +63,20 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
+    public List<Time> getTimeList()
+    {
+        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
+        Uri zones = Uri.parse(uri);
+        ContentResolver cr = getActivity().getContentResolver();
+        Cursor cursor = cr.query(zones, null, null, null, "ZONE_NAME");
+
+        if (cursor != null) {
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                // The Cursor is now set to the right position
+                Time t = new Time(cursor.getString(cursor.getColumnIndex("ZONE_NAME")), cursor.getLong(cursor.getColumnIndex("GMT_OFFSET")));
+                timeList.add(t);
+            }
+        }
+        return timeList;
+    }
 }

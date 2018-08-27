@@ -25,6 +25,7 @@ import pointclickcare.lish.clock.model.Zone;
 import pointclickcare.lish.clock.model.ZoneList;
 import pointclickcare.lish.clock.ui.Clock.Services.TimeZoneDBClient;
 import pointclickcare.lish.clock.ui.MainActivity;
+import pointclickcare.lish.clock.util.Extras;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,11 +61,18 @@ public class AddClockActivity extends AppCompatActivity {
         View contentView = findViewById(R.id.add_clock);
         binding = DataBindingUtil.bind(contentView);
 
-        adapter = new ZoneListAdapter();
+        Intent getIntent = this.getIntent();
+        Bundle bundle = getIntent.getExtras();
+
+        List<Time> getZone = (List<Time>)bundle.getSerializable(Extras.ALARM);
+
+        adapter = new ZoneListAdapter(getZone);
 
         binding.contentAddClock.listZone.setAdapter(adapter);
         binding.contentAddClock.listZone.setLayoutManager(new LinearLayoutManager(this));
         binding.contentAddClock.listZone.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+
 
         binding.backToClockButton.setOnClickListener(
                 viewBtn -> {
@@ -73,6 +81,8 @@ public class AddClockActivity extends AppCompatActivity {
                     String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
                     Uri zones = Uri.parse(uri);
                     ContentResolver cr = this.getContentResolver();
+
+                    cr.delete(zones, null, null);
 
                     for (int i = 0; i < savedZone.size(); i++) {
                         ContentValues cv = new ContentValues();

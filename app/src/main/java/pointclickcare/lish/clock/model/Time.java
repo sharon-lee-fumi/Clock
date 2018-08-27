@@ -1,11 +1,12 @@
 package pointclickcare.lish.clock.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Time {
+public class Time implements Serializable {
     long calculatedTimeMillis;
     private String zoneName;
     private long gmtOffset;
