@@ -157,7 +157,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             });
 
 
-/*            binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Alarm alarm = mAlarmList.get(getAdapterPosition());
                     if (binding.status.isChecked()) {
@@ -166,7 +166,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                         updateAlarmStatus(alarm, false);
                     }
                 }
-            });*/
+            });
 
 
             binding.alarmSetting.btnDelete.setOnClickListener(view -> {
