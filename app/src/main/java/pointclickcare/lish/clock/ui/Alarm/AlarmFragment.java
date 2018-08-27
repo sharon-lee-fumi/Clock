@@ -97,7 +97,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         alarmList.add(alarm);
         Toast.makeText(getContext(), "Alarm " + alarm.getTimeStr() + " is set", Toast.LENGTH_SHORT).show();
 
-        updateList(alarmList);
+        updateList(generateAlarmList());
     }
 
     public void updateList(List<Alarm> alarmList) {
