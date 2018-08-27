@@ -96,7 +96,11 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         cv.put("ALARM_STATUS", alarm.status.get());
 
         cr.insert(alarms, cv);
+
+        alarmList.add(alarm);
         Toast.makeText(getContext(), "Alarm " + alarm.getTimeStr() + " is set", Toast.LENGTH_SHORT).show();
+
+        updateList(alarmList);
     }
 
     private void updateList(List<Alarm> alarmList) {

@@ -1,6 +1,5 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +48,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
     }
 
     public List<Time> getSavedZone() {
+        savedZone.clear();
         //savedZone = null;
         for (int i = 0; i < listZone.size(); i++) {
             if (listZone.get(i).selected.get()) {
