@@ -10,6 +10,10 @@
             name="alarm"
             type="pointclickcare.lish.clock.model.Alarm" />-->
 
+        <!--<variable
+            name="alarm"
+            type="pointclickcare.lish.clock.model.Alarm" />-->
+
         <variable
             name="alarm"
             type="pointclickcare.lish.clock.model.AlarmInterface" />
