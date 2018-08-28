@@ -21,12 +21,16 @@ import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.AlarmDayBinding;
 import pointclickcare.lish.clock.databinding.ListAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
+import pointclickcare.lish.clock.model.AlarmInterface;
+import pointclickcare.lish.clock.model.ProxyAlarm;
 
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
     Context mContext;
     AlarmFragment mAlarmFragment;
-    List<Alarm> mAlarmList = new ArrayList<>();
+    //List<Alarm> mAlarmList = new ArrayList<>();
+    List<AlarmInterface> mAlarmList = new ArrayList<>();
     int alarmPosition;
+
     private List<View.OnClickListener> observers = new ArrayList<>();
 
     public AlarmListAdapter(Context context, AlarmFragment alarmFragment) {
@@ -34,7 +38,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         mAlarmFragment = alarmFragment;
     }
 
-    public void setSource(List<Alarm> list) {
+    public void setSource(List<AlarmInterface> list) {
         if (list == null) return;
         mAlarmList = list;
     }
@@ -48,6 +52,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        //holder.binding.setAlarm(mAlarmList.get(position));
         holder.binding.setAlarm(mAlarmList.get(position));
     }
 
@@ -86,7 +91,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         }
     }
 
-    private void deleteAlarm(Alarm alarm) {
+    private void deleteAlarm(AlarmInterface alarm) {
         alarmPosition = mAlarmList.indexOf(alarm);
         int id = alarmPosition + 1;
 
@@ -102,7 +107,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         }
     }
 
-    private void updateDaysSetting(Alarm alarm) {
+    private void updateDaysSetting(AlarmInterface alarm) {
         alarmPosition = mAlarmList.indexOf(alarm);
         int id = alarmPosition + 1;
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
@@ -147,17 +152,17 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             itemView.setOnClickListener(view -> notifyClickEvent(view));
             binding.alarmSetting.btnCollapse.setOnClickListener(view -> {
                 toggleSettingView(false);
-                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                AlarmInterface alarm = mAlarmList.get(getAdapterPosition());
                 updateDaysSetting(alarm);
             });
             binding.btnExpand.setOnClickListener(view -> toggleSettingView(false));
             binding.alarmTime.setOnClickListener(view -> {
-                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                AlarmInterface alarm = mAlarmList.get(getAdapterPosition());
                 showTimePickerDialog(alarm);
             });
 
 
-            binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+/*            binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Alarm alarm = mAlarmList.get(getAdapterPosition());
                     if (binding.status.isChecked()) {
@@ -166,24 +171,24 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                         updateAlarmStatus(alarm, false);
                     }
                 }
-            });
+            });*/
 
 
             binding.alarmSetting.btnDelete.setOnClickListener(view -> {
-                Alarm alarm = mAlarmList.get(getAdapterPosition());
+                AlarmInterface alarm = mAlarmList.get(getAdapterPosition());
                 deleteAlarm(alarm);
             });
         }
 
         private void toggleSettingView(boolean forceCollapsing) {
-            Alarm alarm = mAlarmList.get(getAdapterPosition());
+            AlarmInterface alarm = mAlarmList.get(getAdapterPosition());
             if (forceCollapsing) alarm.selected = false;
             else alarm.selected ^= true;
             binding.daysContainer.setVisibility(alarm.selected ? View.GONE : View.VISIBLE);
             binding.setAlarm(alarm);
         }
 
-        public void showTimePickerDialog(Alarm alarm) {
+        public void showTimePickerDialog(AlarmInterface alarm) {
             // Create a new instance of TimePickerDialog and return it
             new TimePickerDialog(mContext, this, alarm.getHours(), alarm.getMinutes(), false).show();
             alarmPosition = mAlarmList.indexOf(alarm);

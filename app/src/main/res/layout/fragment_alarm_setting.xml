@@ -11,9 +11,13 @@
             name="showDaysSetting"
             type="boolean" />
 
+        <!--<variable
+            name="alarm"
+            type="pointclickcare.lish.clock.model.Alarm" />-->
+
         <variable
             name="alarm"
-            type="pointclickcare.lish.clock.model.Alarm" />
+            type="pointclickcare.lish.clock.model.AlarmInterface" />
 
     </data>
 

@@ -13,7 +13,7 @@ import java.util.Locale;
 import pointclickcare.lish.clock.ClockApplication;
 import pointclickcare.lish.clock.R;
 
-public class Alarm extends BaseObservable {
+public class Alarm extends BaseObservable implements AlarmInterface{
     public final ObservableBoolean status = new ObservableBoolean();
     public final ObservableBoolean repeat = new ObservableBoolean();
     public final List<ObservableBoolean> days = new ArrayList<>();

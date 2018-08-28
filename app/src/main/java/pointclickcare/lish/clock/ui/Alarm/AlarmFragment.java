@@ -23,6 +23,8 @@ import java.util.List;
 import pointclickcare.lish.clock.R;
 import pointclickcare.lish.clock.databinding.FragmentAlarmBinding;
 import pointclickcare.lish.clock.model.Alarm;
+import pointclickcare.lish.clock.model.AlarmInterface;
+import pointclickcare.lish.clock.model.ProxyAlarm;
 import pointclickcare.lish.clock.ui.MainActivity;
 
 /**
@@ -30,7 +32,8 @@ import pointclickcare.lish.clock.ui.MainActivity;
  */
 public class AlarmFragment extends MainActivity.PlaceholderFragment {
 
-    List<Alarm> alarmList = new ArrayList<>();
+    //List<Alarm> alarmList = new ArrayList<>();
+    List<AlarmInterface> alarmList = new ArrayList<>();
     AlarmListAdapter adapter;
     FragmentAlarmBinding binding;
 
@@ -58,7 +61,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
-    public List<Alarm> generateAlarmList() {
+    public List<AlarmInterface> generateAlarmList() {
         alarmList.clear();
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri);
@@ -68,9 +71,10 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         if (cursor != null) {
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 // The Cursor is now set to the right position
-                Alarm alarm = null;
+                AlarmInterface alarm = null;
                 try {
-                    alarm = new Alarm(new SimpleDateFormat("hh:mm").parse(cursor.getString(cursor.getColumnIndex("ALARM_TIME"))),
+                    //
+                    alarm = new ProxyAlarm(new SimpleDateFormat("hh:mm").parse(cursor.getString(cursor.getColumnIndex("ALARM_TIME"))),
                             cursor.getString(cursor.getColumnIndex("ALARM_DAYS")),
                             cursor.getInt(cursor.getColumnIndex("ALARM_STATUS")));
                 } catch (ParseException e) {
@@ -88,7 +92,8 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues cv = new ContentValues();
 
-        Alarm alarm = new Alarm();
+        //Alarm alarm = new Alarm();
+        AlarmInterface alarm = new ProxyAlarm();
         cv.put("ALARM_TIME", alarm.getTimeStr());
         cv.put("ALARM_DAYS", alarm.getDaysStr());
         cv.put("ALARM_STATUS", alarm.status.get());
@@ -100,7 +105,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         updateList(generateAlarmList());
     }
 
-    public void updateList(List<Alarm> alarmList) {
+    public void updateList(List<AlarmInterface> alarmList) {
         adapter.setSource(alarmList);
         adapter.notifyDataSetChanged();
     }
