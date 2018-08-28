@@ -4,11 +4,13 @@
 
     <data>
 
-        <import type="android.view.View" />
+        <!--<variable
+            name="alarm"
+            type="pointclickcare.lish.clock.model.Alarm" />-->
 
         <variable
             name="alarm"
-            type="pointclickcare.lish.clock.model.Alarm" />
+            type="pointclickcare.lish.clock.model.AlarmInterface" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,8 +35,7 @@
                 android:layout_margin="5dp"
                 android:paddingLeft="5dp"
                 android:text="@{alarm.timeStr}"
-                android:textColor="@{alarm.onOff ? @color/colorPrimaryText : @color/colorPrimaryDisabledText}"
-                tools:text="8:00" />
+                tools:text="8:00"/>
 
             <TextView
                 android:id="@+id/alarmPeriod"
@@ -45,22 +46,21 @@
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:text="@{alarm.amPmStr}"
-                tools:text="AM" />
+                tools:text="AM"/>
 
             <Switch
-                android:id="@+id/onOff"
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:checked="@={alarm.onOff}" />
+                android:checked="@={alarm.status}" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/days_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="@{alarm.selected ? View.GONE : View.VISIBLE}">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/days"
@@ -71,7 +71,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:text="@{alarm.daysStr}"
-                tools:text="Tomorrow" />
+                tools:text="Tomorrow"/>
 
             <ImageButton
                 android:id="@+id/btn_expand"
@@ -87,8 +87,8 @@
         <include
             android:id="@+id/alarm_setting"
             layout="@layout/fragment_alarm_setting"
-            android:visibility="@{alarm.selected ? View.VISIBLE : View.GONE}"
-            bind:alarm="@{alarm}" />
+            bind:alarm="@{alarm}"
+            bind:showDaysSetting="@{alarm.selected}" />
     </LinearLayout>
 
 </layout>
