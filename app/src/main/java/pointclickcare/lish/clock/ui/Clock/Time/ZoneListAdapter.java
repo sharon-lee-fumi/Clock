@@ -49,7 +49,6 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
 
     public List<Time> getSavedZone() {
         savedZone.clear();
-        //savedZone = null;
         for (int i = 0; i < listZone.size(); i++) {
             if (listZone.get(i).selected.get()) {
                 Time time = new Time(listZone.get(i).getZoneName(), listZone.get(i).getGmtOffset());
@@ -74,7 +73,7 @@ public class ZoneListAdapter extends RecyclerView.Adapter<ZoneListAdapter.ViewHo
                     }
                 }
             }
-            
+
             itemView.setOnClickListener((view) ->
                     new TimeZoneDBClient().getZoneTime(zone.getZoneName())
             );

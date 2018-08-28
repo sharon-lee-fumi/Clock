@@ -44,8 +44,6 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         super.onCreate(savedInstanceState);
 
         getTimeList();
-/*        adapter = new TimeListAdapter();
-        adapter.setSource(getTimeList());*/
     }
 
     @Override
@@ -65,8 +63,7 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
-    public List<Time> getTimeList()
-    {
+    public List<Time> getTimeList() {
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
         Uri zones = Uri.parse(uri);
         ContentResolver cr = getActivity().getContentResolver();

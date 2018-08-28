@@ -24,12 +24,14 @@ import pointclickcare.lish.clock.model.Alarm;
 
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
     Context mContext;
+    AlarmFragment mAlarmFragment;
     List<Alarm> mAlarmList = new ArrayList<>();
     int alarmPosition;
     private List<View.OnClickListener> observers = new ArrayList<>();
 
-    public AlarmListAdapter(Context context) {
+    public AlarmListAdapter(Context context, AlarmFragment alarmFragment) {
         mContext = context;
+        mAlarmFragment = alarmFragment;
     }
 
     public void setSource(List<Alarm> list) {
@@ -75,9 +77,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
         ContentValues cv = new ContentValues();
         cv.put("ALARM_STATUS", i);
-        cr.update(alarms, cv, null, null);
-
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is updated", Toast.LENGTH_SHORT).show();
+        int returns = cr.update(alarms, cv, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is updated", Toast.LENGTH_SHORT).show();
+            updateAlarmList();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void deleteAlarm(Alarm alarm) {
@@ -87,10 +93,13 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri + "/" + id);
         ContentResolver cr = mContext.getContentResolver();
-        cr.delete(alarms, null, null);
-
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
-
+        int returns = cr.delete(alarms, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
+            updateAlarmList();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateDaysSetting(Alarm alarm) {
@@ -102,9 +111,17 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
         ContentValues cv = new ContentValues();
         cv.put("ALARM_DAYS", alarm.getDaysBool(alarm.days));
-        cr.update(alarms, cv, null, null);
+        int returns = cr.update(alarms, cv, null, null);
+        if (returns == 1) {
+            Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " days is updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " days is updated", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateAlarmList() {
+        mAlarmFragment.updateList(mAlarmFragment.generateAlarmList());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -122,9 +139,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             for (AlarmDayBinding alarmDayBinding : bindingsForAlarmDayButton) {
                 alarmDayBinding.alarmDaysContainer.setOnClickListener(view -> {
-                    //Alarm alarm = mAlarmList.get(getAdapterPosition());
                     alarmDayBinding.cbSelect.setChecked(!alarmDayBinding.cbSelect.isChecked());
-                    //alarmDayBinding.setAlarmData(alarm.alarmData);
                 });
             }
 
@@ -142,9 +157,6 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             });
 
 
-
-
-
             binding.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Alarm alarm = mAlarmList.get(getAdapterPosition());
@@ -155,7 +167,6 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
                     }
                 }
             });
-
 
 
             binding.alarmSetting.btnDelete.setOnClickListener(view -> {
@@ -188,9 +199,14 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
 
             ContentValues cv = new ContentValues();
             cv.put("ALARM_TIME", hour + ":" + minute);
-            cr.update(alarms, cv, null, null);
+            int returns = cr.update(alarms, cv, null, null);
 
-            Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
+            if (returns == 1) {
+                Toast.makeText(mContext, "Alarm " + hour + ":" + minute + " is set", Toast.LENGTH_SHORT).show();
+                updateAlarmList();
+            } else {
+                Toast.makeText(mContext, "Something is wrong", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

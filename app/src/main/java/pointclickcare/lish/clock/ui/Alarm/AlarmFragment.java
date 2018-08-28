@@ -48,10 +48,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
         View view = binding.getRoot();
 
-        //alarmList = generateAlarmList();
-        adapter = new AlarmListAdapter(getContext());
-        //adapter.setSource(alarmList);
-
+        adapter = new AlarmListAdapter(getContext(), AlarmFragment.this);
         updateList(generateAlarmList());
 
         binding.listAlarm.setAdapter(adapter);
@@ -61,7 +58,8 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         return view;
     }
 
-    private List<Alarm> generateAlarmList() {
+    public List<Alarm> generateAlarmList() {
+        alarmList.clear();
         String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/alarms";
         Uri alarms = Uri.parse(uri);
         ContentResolver cr = getActivity().getContentResolver();
@@ -94,16 +92,15 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         cv.put("ALARM_TIME", alarm.getTimeStr());
         cv.put("ALARM_DAYS", alarm.getDaysStr());
         cv.put("ALARM_STATUS", alarm.status.get());
-
         cr.insert(alarms, cv);
 
         alarmList.add(alarm);
         Toast.makeText(getContext(), "Alarm " + alarm.getTimeStr() + " is set", Toast.LENGTH_SHORT).show();
 
-        updateList(alarmList);
+        updateList(generateAlarmList());
     }
 
-    private void updateList(List<Alarm> alarmList) {
+    public void updateList(List<Alarm> alarmList) {
         adapter.setSource(alarmList);
         adapter.notifyDataSetChanged();
     }
