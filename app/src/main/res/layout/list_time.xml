@@ -18,7 +18,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/country_name"
+            android:id="@+id/zone_name"
             style="@style/ZoneStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,8 +26,8 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:checked="false"
-            android:text="@{time.countryName}"
-            tools:text="Canada" />
+            android:text="@{time.getZoneName}"
+            tools:text="Toronto" />
 
         <TextView
             android:id="@+id/formattedTime"

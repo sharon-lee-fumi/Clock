@@ -32,10 +32,6 @@ public class Time implements Serializable {
         this.gmtOffset = gmtOffset;
     }
 
-    public String getCountryName() {
-        return zoneName;
-    }
-
     public String getCalculatedTime() {
         long unixTime = System.currentTimeMillis();
         long localOffset = TimeZone.getDefault().getRawOffset();

@@ -6,7 +6,6 @@ import android.databinding.ObservableBoolean;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class Zone extends BaseObservable {
@@ -72,10 +71,10 @@ public class Zone extends BaseObservable {
     }
 
     public String getFormattedTime() {
-        return new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(timestamp));
+        return new SimpleDateFormat("HH:mm", Locale.getDefault()).format(timestamp* 1000L);
     }
 
     public String getFormattedPeriod() {
-        return new SimpleDateFormat("a", Locale.getDefault()).format(timestamp);
+        return new SimpleDateFormat("a", Locale.getDefault()).format(timestamp* 1000L);
     }
 }
