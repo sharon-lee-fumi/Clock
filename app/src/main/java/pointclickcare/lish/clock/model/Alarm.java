@@ -13,27 +13,24 @@ import java.util.Locale;
 import pointclickcare.lish.clock.ClockApplication;
 import pointclickcare.lish.clock.R;
 
-public class Alarm extends BaseObservable {
-    public final ObservableBoolean onOff = new ObservableBoolean();
+public class Alarm extends BaseObservable implements AlarmInterface{
+    public final ObservableBoolean status = new ObservableBoolean();
     public final ObservableBoolean repeat = new ObservableBoolean();
     public final List<ObservableBoolean> days = new ArrayList<>();
     public boolean selected;
     public String strSeparator = " ";
-    private transient Integer alarmId;
     private Date time;
 
     public Alarm() {
-        this.alarmId = -1;
         this.time = new Date();
-        this.onOff.set(true);
+        this.status.set(true);
         this.selected = false;
         for (int i = 0; i < 7; i++) {
             days.add(new ObservableBoolean());
         }
     }
 
-    public Alarm(Integer alarmId, Date time, String daysString, int status) {
-        this.alarmId = alarmId;
+    public Alarm(Date time, String daysString, int status) {
         boolean repeatFlag = false;
         this.time = time;
 
@@ -52,22 +49,14 @@ public class Alarm extends BaseObservable {
         }
 
         if (status == 1) {
-            this.onOff.set(true);
+            this.status.set(true);
         } else {
-            this.onOff.set(false);
+            this.status.set(false);
         }
 
         if (repeatFlag) {
             this.repeat.set(true);
         }
-    }
-
-    public Integer getAlarmId() {
-        return alarmId;
-    }
-
-    public void setAlarmId(Integer alarmId) {
-        this.alarmId = alarmId;
     }
 
     public Date getTime() {
