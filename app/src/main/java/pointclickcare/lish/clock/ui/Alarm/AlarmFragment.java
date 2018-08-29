@@ -45,7 +45,7 @@ public class AlarmFragment extends MainActivity.PlaceholderFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_alarm, container, false);
         View view = binding.getRoot();
 
-        adapter = new AlarmListAdapter(getContext());
+        adapter = new AlarmListAdapter(getContext(), AlarmFragment.this);
         updateList(loadAlarmList());
 
         binding.listAlarm.setAdapter(adapter);
