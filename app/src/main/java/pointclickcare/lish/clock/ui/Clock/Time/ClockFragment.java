@@ -64,7 +64,7 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     }
 
     public List<Time> getTimeList() {
-        String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
+        String uri = "content://pointclickcare.lish.ClockContentProvider/zones";
         Uri zones = Uri.parse(uri);
         ContentResolver cr = getActivity().getContentResolver();
         Cursor cursor = cr.query(zones, null, null, null, "ZONE_NAME");

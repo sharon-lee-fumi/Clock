@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -45,6 +45,7 @@
             android:layout_centerInParent="true"
             android:text="@{dayStr}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@{alarm.days.get(day) ? @android:color/black : @android:color/white}" />
+            android:textColor="@{alarm.days.get(day) ? @android:color/black : @android:color/white}"
+            tools:text="W" />
     </RelativeLayout>
 </layout>

@@ -11,16 +11,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import pointclickcare.lish.clock.util.ClockDatabaseHelper;
-
 public class ClockContentProvider extends ContentProvider {
-    private static final String PROVIDER_NAME = "pointclickcare.lish.clock.util.ClockContentProvider";
+    private static final String PROVIDER_NAME = "pointclickcare.lish.ClockContentProvider";
+    public static final Uri PROVIDER_ZONE_URI = Uri.parse("content://" + PROVIDER_NAME + "/zones");
+    public static final Uri PROVIDER_ALARM_URI = Uri.parse("content://" + PROVIDER_NAME + "/alarms");
     private static final int PROVIDER_ZONE = 1;
     private static final int PROVIDER_ZONE_ID = 2;
     private static final int PROVIDER_ALARM = 3;
     private static final int PROVIDER_ALARM_ID = 4;
-    private static final Uri PROVIDER_ZONE_URI = Uri.parse("content://" + PROVIDER_NAME + "/zones");
-    private static final Uri PROVIDER_ALARM_URI = Uri.parse("content://" + PROVIDER_NAME + "/alarms");
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {

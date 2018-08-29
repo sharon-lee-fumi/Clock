@@ -11,6 +11,7 @@ import java.util.Locale;
 
 public class Zone extends BaseObservable {
     public final ObservableBoolean selected = new ObservableBoolean();
+    private transient Integer zoneId;
     @SerializedName("countryCode")
     private String countryCode;
     @SerializedName("countryName")
@@ -21,6 +22,14 @@ public class Zone extends BaseObservable {
     private Long gmtOffset;
     @SerializedName("timestamp")
     private Long timestamp;
+
+    public Integer getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Integer zoneId) {
+        this.zoneId = zoneId;
+    }
 
     public String getCountryCode() {
         return countryCode;

@@ -3,7 +3,7 @@ package pointclickcare.lish.clock.model;
 import com.google.gson.annotations.SerializedName;
 
 public abstract class Response {
-    @SerializedName("status")
+    @SerializedName("onOff")
     private String status;
 
     @SerializedName("message")

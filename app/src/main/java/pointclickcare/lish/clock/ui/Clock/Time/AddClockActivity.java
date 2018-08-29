@@ -76,7 +76,7 @@ public class AddClockActivity extends AppCompatActivity {
                 viewBtn -> {
                     savedZone = adapter.getSavedZone();
 
-                    String uri = "content://pointclickcare.lish.clock.util.ClockContentProvider/zones";
+                    String uri = "content://pointclickcare.lish.ClockContentProvider/zones";
                     Uri zones = Uri.parse(uri);
                     ContentResolver cr = this.getContentResolver();
 
