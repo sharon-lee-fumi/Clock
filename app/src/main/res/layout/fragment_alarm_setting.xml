@@ -17,8 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:orientation="vertical"
-        android:padding="10dp"
-        tools:context=".ui.Alarm.AlarmSettingFragment">
+        android:padding="10dp">
 
         <CheckBox
             android:id="@+id/alarm_setting_repeat"

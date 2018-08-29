@@ -41,8 +41,7 @@ public class Timer implements Serializable {
         this.minutes = minutes;
     }
 
-    public Long calculate()
-    {
+    public Long calculate() {
         timeBuff = (this.hours * 3600 + this.minutes * 60 + this.seconds) * 1000L;
         return timeBuff;
     }

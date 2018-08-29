@@ -27,12 +27,14 @@ import pointclickcare.lish.clock.model.Alarm;
 import pointclickcare.lish.clock.util.ClockContentProvider;
 
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
+    AlarmFragment mAlarmFragment;
     private Context mContext;
     private List<Alarm> mAlarmList = new ArrayList<>();
     private Set<View.OnClickListener> mObservers = new HashSet<>();
 
-    public AlarmListAdapter(Context context) {
+    public AlarmListAdapter(Context context, AlarmFragment alarmFragment) {
         mContext = context;
+        mAlarmFragment = alarmFragment;
     }
 
     public void setSource(List<Alarm> list) {
@@ -97,8 +99,11 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         cv.put("ALARM_STATUS", alarm.onOff.get() ? 1 : 0);
         int count = cr.update(alarms, cv, null, null);
         if (count == 1) {
-            Toast.makeText(mContext, "Alarm " + alarm.getHours() + ":" + alarm.getMinutes() + " is set", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Alarm " + alarm.getHours() + ":" + alarm.getMinutes() + " is updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Something is wrong!", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void deleteAlarm(Alarm alarm) {
@@ -112,6 +117,8 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
             mObservers.remove(alarm.getAlarmId());
             notifyItemRemoved(position);
             Toast.makeText(mContext, "Alarm " + alarm.getTimeStr() + " is deleted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Something is wrong!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -163,10 +170,11 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
-            calendar.set(Calendar.HOUR, hour);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
             calendar.set(Calendar.MINUTE, minute);
             alarm.setTime(calendar.getTime());
             updateAlarm(alarm);
+            mAlarmFragment.updateList(mAlarmFragment.loadAlarmList());
         }
 
         @Override

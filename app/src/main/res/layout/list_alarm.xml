@@ -45,6 +45,7 @@
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:text="@{alarm.amPmStr}"
+                android:textColor="@{alarm.onOff ? @color/colorPrimaryText : @color/colorPrimaryDisabledText}"
                 tools:text="AM" />
 
             <Switch
