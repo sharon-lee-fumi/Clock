@@ -36,7 +36,7 @@
         </activity>
         <provider
             android:name=".util.ClockContentProvider"
-            android:authorities="pointclickcare.lish.clock.util.ClockContentProvider"
+            android:authorities="pointclickcare.lish.ClockContentProvider"
             android:enabled="true"
             android:exported="true"
             android:permission="pointclickcare.lish.clock.PROVIDER_PERMISSION" />
