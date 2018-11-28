@@ -1,2 +1,2 @@
 # Clock
-Android Clock UI
+Android Clock
