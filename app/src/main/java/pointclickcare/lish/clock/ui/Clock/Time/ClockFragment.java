@@ -1,11 +1,11 @@
 package pointclickcare.lish.clock.ui.Clock.Time;
 
-
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +22,8 @@ import pointclickcare.lish.clock.model.Clock;
 import pointclickcare.lish.clock.model.Time;
 import pointclickcare.lish.clock.ui.MainActivity;
 
+import static android.os.Looper.getMainLooper;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +32,14 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
     List<Time> timeList = new ArrayList<>();
     TimeListAdapter adapter;
     FragmentClockBinding binding;
+
+    private final Handler mHandler = new Handler();
+    private final Runnable mRunnable = new Runnable() {
+        public void run() {
+            binding.setClock(new Clock());
+            mHandler.postDelayed(mRunnable, 0);
+        }
+    };
 
     public ClockFragment() {
         // Required empty public constructor
@@ -52,8 +62,8 @@ public class ClockFragment extends MainActivity.PlaceholderFragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clock, container, false);
         View view = binding.getRoot();
-        Clock clock = new Clock();
-        binding.setClock(clock);
+
+        mHandler.post(mRunnable);
 
         adapter = new TimeListAdapter();
         adapter.setSource(timeList);
